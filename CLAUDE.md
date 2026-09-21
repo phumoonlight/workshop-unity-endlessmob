@@ -35,6 +35,7 @@ Claude's working directory is the **repo root**: shell, Grep and file-tool paths
 - Edit any scene, open or not: `SceneManager.GetSceneByPath`; if not loaded, `EditorSceneManager.OpenScene(path, OpenSceneMode.Additive)`, then save and `CloseScene`.
 - Private `[SerializeField]`s: `new UnityEditor.SerializedObject(c).FindProperty("name")` + `ApplyModifiedPropertiesWithoutUndo()`. Set TMP text via `m_text` the same way.
 - Finish with `MarkSceneDirty` + save + `AssetDatabase.SaveAssets()`; `return` a short log string. Make scripts re-runnable (delete the object/asset first if it exists).
+- There is no `refresh` command: use `unity command eval "UnityEditor.AssetDatabase.Refresh(); return 0;"` after adding or deleting files from the shell. `recompile_status` ends as `completed` or `up_to_date`.
 - **Calls over ~5 s time out** but the work finishes — write results to a file and poll.
 - `EditorBuildSettings.scenes` reaches disk only after `unity command save_all`.
 - Use `FindAnyObjectByType` (with `FindObjectsInactive.Include` for disabled objects), not the deprecated `FindFirstObjectByType`.
@@ -53,6 +54,8 @@ Claude's working directory is the **repo root**: shell, Grep and file-tool paths
 - Renaming a serialized field needs `[FormerlySerializedAs("old")]` or Inspector values reset.
 - `Time.timeScale == 0` means **paused** here; `HitStop` slows to 5 %, never 0.
 - Save ids (`ItemData.id`, `PlayerClassData.id`) are permanent — **never change or reuse one**; bump `PlayerProfile.SaveVersion` when the save layout changes.
+- `GameAudio` remembers a missing sound as missing until the next Play press — a new file in `Resources/Sfx/` needs Stop → Play.
+- A script rename keeps its scene links only if the `.cs` and `.meta` move together (`git mv` both).
 - Enemy renderers must be **destroyed, not disabled** (`Enemy.Update` re-enables them).
 
 ## Code conventions

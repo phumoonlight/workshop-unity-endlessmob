@@ -3,8 +3,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 // Debug readouts and run controls, drawn with Unity's old OnGUI text:
-// FPS and live enemy count (bottom-right), the Esc pause screen, and R / M after
-// a run ends. The player-facing numbers live on RunHud.
+// FPS and live enemy count (bottom-right) and the Esc pause screen (M quits to
+// the menu). The player-facing numbers live on RunHud; the buttons after a run
+// ends are on WaveHud's result panel.
 public class DebugHUD : MonoBehaviour
 {
     [SerializeField] PlayerHealth player;

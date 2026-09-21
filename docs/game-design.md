@@ -71,6 +71,9 @@ The shop (pre-start screen) checks for stash room **before** taking coins. Coins
 The castle-defense mode is switched off but its code and scene objects remain: the Castle with corner archers and upgrades, wave manager, castle health bar, chest spawner, wilderness scouts, fog of war, building (Barracks, Towers, Builder huts, outposts). See [architecture.md](architecture.md#shelved-systems) for what is disabled where.
 
 ## Known gaps and ideas
+- **Waiting for a first playtest (added 2026-09-22, compile-checked only):** the dagger flies point-first and is big enough to read; Bouncing Blade hops correctly and the final-strike blade is not too strong under Rapid Fire; Rapid Fire at 3× looks acceptable with the bow animation; the gear icon, slider layout and drag feel; Esc closes settings *before* it pauses; the DEV button and panel in their new spot. Delete this line once checked.
+- **Sound licences:** `Resources/Sfx/Slash/ABOUT.txt` guesses the slash sound is from Pixabay; the dagger throw (`Shoot.ogg`) has no source written down at all. Record both before sharing the game.
+- The settings window exists only in the run; the main menu and pre-start screen have no way to change volume.
 - **Two survival clocks** show (top-centre and top-left) — decide which to keep.
 - **Icons are placeholders** drawn in code; items are coloured squares. A small sprite set (coin, heart, sword, berry) would replace them.
 - **Balance is untested:** spawn curve, health growth, Brute timing, class XP curve, prices, Relic/Armor strength, capture speed with enemies inside.
