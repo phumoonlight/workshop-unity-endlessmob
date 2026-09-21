@@ -74,7 +74,7 @@ The castle-defense mode is switched off but its code and scene objects remain: t
 - **Icons are placeholders** drawn in code; items are coloured squares. A small sprite set (coin, heart, sword, berry) would replace them.
 - **Balance is untested:** spawn curve, health growth, Brute timing, class XP curve, prices, Relic/Armor strength, capture speed with enemies inside.
 - **Lighting:** one directional light and the default skybox; a warmer-light/sky pass was skipped.
-- **Audio:** only sword swings exist. `Hit` (impacts) is the most-missed sound. Real audio files, not synthesized ones.
+- **Audio:** only sword swings and the Assassin's dagger throw (`Shoot`) exist. `Hit` (impacts) is the most-missed sound. Real audio files, not synthesized ones.
 - Enemies only walk (no attack or death animations); Q/R skills reuse the normal swing; the Swordsman has no R skill.
 - Particles don't cover skills, the Brute's slam, or daggers in flight.
 - The Assassin still **holds a bow and plays the bow animations** while throwing daggers. The Haons pack has twin-dagger props and a `WeaponMaster Twin dagger(WTD)` animation set that could replace them.
