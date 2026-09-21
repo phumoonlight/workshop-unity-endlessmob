@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: bf685e2b67465c64c8f5efdc5b241fd1
-AssetOrigin:
-  serializedVersion: 1
-  productId: 177824
-  packageName: SwordSoundPack
-  packageVersion: 1.0
-  assetPath: Assets/SwordSoundPack/SWORD_14.wav
-  uploadId: 387211
+guid: f984b8759a024df4ea77f4f48c5c3039
 AudioImporter:
   externalObjects: {}
   serializedVersion: 8

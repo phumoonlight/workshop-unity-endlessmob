@@ -1,13 +1,20 @@
-Sword swing sounds, 28 takes, from a free sound pack downloaded by the
-developer (originally imported as Assets/SwordSoundPack).
+Sword swing sound: one take, downloaded by the developer.
 
-Write the pack's name, author and licence here before the game is shared --
-the folder it came in was the only record of where these are from, and moving
-the files here lost it.
+    freesound_community-sword-sound-2-36274.mp3
 
-GameAudio picks one of these at random for every sword swing, never the same
-one twice in a row. Every clip here is a *swing*: silent for its first tenth
-of a second, then swelling to a peak around 0.3s. That is why MeleeSlash
-starts the sound at the wind-up instead of at the moment of impact.
+The file name is how Pixabay names its downloads (uploader
+"freesound_community", sound id 36274) -- confirm that is where it came from
+and write its licence here before the game is shared.
 
-Adding or deleting takes needs no code -- the folder is read at runtime.
+It replaced 28 takes from an unnamed free pack (SWORD_01..28.wav). They are
+still in git history if they are ever wanted back.
+
+The clip is quiet for its first 0.16s, loudest at 0.20s and over by 0.30s.
+That is why MeleeSlash starts the sound at the wind-up instead of at the
+moment of impact: the whoosh then comes just before the blade connects.
+A replacement should have a similar shape, or that timing needs another look.
+
+GameAudio plays a random file from this folder for every swing (never the
+same twice in a row), with a small random pitch change. With one file it is
+the pitch change alone that keeps it from sounding like a machine. Adding or
+deleting takes needs no code -- the folder is read at runtime.
