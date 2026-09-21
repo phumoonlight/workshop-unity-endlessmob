@@ -77,6 +77,7 @@ Data assets are created from **Create > Endless Mob > Building / Item / Player C
 ## Performance
 - **F9** in play mode records; F9 again writes `Logs/PerfReport.txt` (`PerfProbe`: frame-time percentiles, GC per frame, peaks). Editor and Development Builds only.
 - First measurement (158 enemies): the cost was **enemy renderers, not spawning** — each had 21 renderers / 26 materials / 20 shadow casters, 7 of them zero-triangle `GuideDummy` markers (each with a `TextMesh`, which must be removed before its `MeshRenderer`). Now 8–9 renderers, 13–14 materials, no shadow casting.
+- **Pickups are pooled** (`PickupPool`, in `Progression`): a stack of switched-off spares per prefab. `Enemy.Drop` and `Loot.Scatter` call `PickupPool.Spawn`; a collected pickup calls `PickupPool.Release` instead of `Destroy`. `MagnetPickup.OnEnable` resets what a use changed (`isFlying`, `flySpeed`) — **anything new that changes during a pickup's life must be reset there too**. Unlike `Vfx`, the spares are *not* `DontDestroyOnLoad`: they die with the run's scene and `Spawn` skips dead ones (`== null`). A pickup not made by `Spawn` (the shelved `TreasureChest` still uses `Instantiate`) has no `PoolPrefab` and is destroyed as before. Still un-pooled: enemies, `SlashEffect`, daggers, enemy arrows.
 - Also done: building scans cached for 0.3 s with a staggered start; hot loops **index** `Structure.All` (a `foreach` over an interface allocates an enumerator); HUD text only rebuilt on change.
 - A built game runs noticeably smoother than the editor.
 

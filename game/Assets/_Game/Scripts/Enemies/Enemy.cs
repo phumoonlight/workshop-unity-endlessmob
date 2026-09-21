@@ -246,7 +246,7 @@ public class Enemy : MonoBehaviour
     }
 
     // The first item lands on the spot; the rest scatter around it.
-    void Drop(GameObject prefab, int index)
+    void Drop(MagnetPickup prefab, int index)
     {
         Vector3 position = transform.position;
         if (index > 0)
@@ -255,7 +255,7 @@ public class Enemy : MonoBehaviour
             position += new Vector3(offset.x, 0f, offset.y);
         }
         position.y = prefab.transform.position.y;
-        Instantiate(prefab, position, Quaternion.identity);
+        PickupPool.Spawn(prefab, position); // reuses a collected one when it can
     }
 
     // Normal enemies: chase a nearby player, otherwise attack a nearby building,
@@ -417,12 +417,12 @@ public class Enemy : MonoBehaviour
 
         // Loot: normal enemies drop 1 gem (and maybe a coin); big ones drop a pile.
         for (int i = 0; i < gemDropCount && xpGemPrefab != null; i++)
-            Drop(xpGemPrefab.gameObject, i);
+            Drop(xpGemPrefab, i);
 
         // Random.value is a random number from 0 to 1.
         if (coinPrefab != null && Random.value < coinDropChance)
             for (int i = 0; i < coinDropCount; i++)
-                Drop(coinPrefab.gameObject, i + 1);
+                Drop(coinPrefab, i + 1);
 
         Destroy(gameObject);
     }

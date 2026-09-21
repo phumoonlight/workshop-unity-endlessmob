@@ -12,11 +12,27 @@ public abstract class MagnetPickup : MonoBehaviour
     // Shared by all pickups. PlayerExperience knows the pickup radius.
     static PlayerExperience player;
     bool isFlying;
+    float startFlySpeed;
+
+    // Set by PickupPool: which prefab this was made from, so it knows which
+    // stack of spares to go back to. Null = not pooled (it is destroyed instead).
+    public MagnetPickup PoolPrefab { get; set; }
 
     void Awake()
     {
+        startFlySpeed = flySpeed;
         if (player == null)
             player = FindAnyObjectByType<PlayerExperience>();
+    }
+
+    // Pickups are reused (see PickupPool). Awake runs once in an object's
+    // life, but OnEnable runs every time it is switched back on, so anything
+    // that changed during the last use is put back here. Without this a reused
+    // gem would start out already flying, at the speed it ended with.
+    void OnEnable()
+    {
+        isFlying = false;
+        flySpeed = startFlySpeed;
     }
 
     void Update()
@@ -44,7 +60,7 @@ public abstract class MagnetPickup : MonoBehaviour
         {
             Collect(player.gameObject);
             Vfx.Play(Vfx.Kind.Pickup, transform.position);
-            Destroy(gameObject);
+            PickupPool.Release(this); // switched off and kept as a spare, not destroyed
             return;
         }
 

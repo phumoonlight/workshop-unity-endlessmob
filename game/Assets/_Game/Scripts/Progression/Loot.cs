@@ -14,7 +14,7 @@ public static class Loot
             Vector2 offset = Random.insideUnitCircle * radius;
             Vector3 position = center + new Vector3(offset.x, 0f, offset.y);
             position.y = prefab.transform.position.y; // each pickup's own resting height
-            Object.Instantiate(prefab, position, Quaternion.identity);
+            PickupPool.Spawn(prefab, position);
         }
     }
 }
