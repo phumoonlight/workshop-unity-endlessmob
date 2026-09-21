@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-// A basic enemy: marches to the castle and attacks it, but attacks district
-// buildings it passes near, and chases the player if they come close.
+// A basic enemy. What it does depends on its Role (see below): a Hunter goes
+// straight for the hero (every enemy the spawner makes), a Guard stays at its
+// camp, an Attacker marches on the castle (the shelved castle mode).
 // Dies when health runs out.
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
@@ -63,7 +64,19 @@ public class Enemy : MonoBehaviour
     [Tooltip("A camp guard stops chasing when the player is this far from the camp.")]
     [SerializeField] float guardLeashRange = 16f;
 
-    bool isGuard;
+    // What kind of enemy this is. An "enum" is one variable that holds exactly
+    // one choice from a named list -- like a traffic light, which is red OR
+    // yellow OR green, never two at once. This used to be two yes/no switches
+    // (isGuard, huntsPlayerOnly), which also allowed "both yes": a combination
+    // that means nothing. With an enum that mistake cannot be written.
+    enum Role
+    {
+        Attacker, // marches on the castle, fights what it meets (the shelved castle mode)
+        Guard,    // stays at a camp, chases a hero who comes close, then walks home
+        Hunter    // survivor mode: only ever goes for the hero
+    }
+
+    Role role = Role.Attacker;
     Vector3 guardHome;
     float guardAggroOverride = -1f;
     // Looking for a building to attack is spread out in time. The first scan is
@@ -145,7 +158,7 @@ public class Enemy : MonoBehaviour
     // aggroRange < 0 keeps the default guard aggro range.
     public void MakeGuard(Vector3 home, float aggroRange = -1f)
     {
-        isGuard = true;
+        role = Role.Guard;
         guardHome = home;
         guardAggroOverride = aggroRange;
     }
@@ -160,8 +173,7 @@ public class Enemy : MonoBehaviour
     // Survivor mode: stricter than HuntPlayer above. Never stops for a building,
     // never falls back to the castle -- only ever the hero, from anywhere on the
     // map. Set by EnemySpawner on everything it makes.
-    bool huntsPlayerOnly;
-    public void HuntPlayerOnly() => huntsPlayerOnly = true;
+    public void HuntPlayerOnly() => role = Role.Hunter;
 
     // Moves the enemy instantly (the spawner uses it to bring back stragglers).
     // Through the Rigidbody, so physics doesn't see it as a very fast push.
@@ -175,7 +187,16 @@ public class Enemy : MonoBehaviour
     // FixedUpdate runs in step with the physics engine. Use it for moving Rigidbodies.
     void FixedUpdate()
     {
-        Vector3? target = isGuard ? GuardTarget() : AttackerTarget();
+        // One question -- "what am I?" -- picks the behaviour. Adding a new
+        // kind of enemy later means one new name in Role and one new line here.
+        Vector3? target;
+        switch (role)
+        {
+            case Role.Guard:  target = GuardTarget();    break;
+            case Role.Hunter: target = HunterTarget();   break;
+            default:          target = AttackerTarget(); break;
+        }
+
         if (target == null || MovementLocked)
         {
             body.linearVelocity = Vector3.zero;
@@ -263,18 +284,6 @@ public class Enemy : MonoBehaviour
     // "Vector3?" means "a Vector3, or null for nowhere to go".
     Vector3? AttackerTarget()
     {
-        if (huntsPlayerOnly)
-        {
-            targetStructure = null; // never stop to hit a building on the way
-            if (player != null && !player.IsDead)
-            {
-                aimPoint = player.transform.position;
-                return player.transform.position;
-            }
-            aimPoint = null;
-            return null; // hero is down: stand still
-        }
-
         targetStructure = FindNearbyBuilding();
         if (targetStructure == null)
         {
@@ -303,6 +312,19 @@ public class Enemy : MonoBehaviour
         }
         aimPoint = null;
         return null;
+    }
+
+    // Hunters (survivor mode): the hero, from anywhere on the map, and nothing else.
+    Vector3? HunterTarget()
+    {
+        targetStructure = null; // never stop to hit a building on the way
+        if (player != null && !player.IsDead)
+        {
+            aimPoint = player.transform.position;
+            return player.transform.position;
+        }
+        aimPoint = null;
+        return null; // hero is down: stand still
     }
 
     void Shoot(Vector3 target)
