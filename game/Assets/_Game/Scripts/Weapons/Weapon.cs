@@ -127,7 +127,7 @@ public abstract class Weapon : MonoBehaviour
     protected static Enemy FindNearestEnemy(Vector3 position, float range, Collider[] buffer)
     {
         // The mask makes physics return enemies only, instead of every
-        // collider in range (ground, gems, coins, bushes...). See Layers.
+        // collider in range (the ground, the hero, daggers, arrows...). See Layers.
         int count = Physics.OverlapSphereNonAlloc(position, range, buffer, Layers.EnemyMask);
 
         Enemy nearest = null;

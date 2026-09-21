@@ -5,7 +5,7 @@ using UnityEngine;
 // A layer is a label on a GameObject (top right of the Inspector). A physics
 // question like "what is inside this sphere?" can be given a MASK -- a list of
 // layers to look at -- and the physics engine then skips everything else
-// before our code ever sees it: the ground, pickups, bushes, the hero.
+// before our code ever sees it: the ground, the hero, daggers, enemy arrows.
 //
 // Layers are created in Edit > Project Settings > Tags and Layers. The names
 // here must match the names there.
