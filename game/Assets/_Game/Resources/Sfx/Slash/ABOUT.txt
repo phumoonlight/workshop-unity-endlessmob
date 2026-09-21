@@ -1,0 +1,13 @@
+Sword swing sounds, 28 takes, from a free sound pack downloaded by the
+developer (originally imported as Assets/SwordSoundPack).
+
+Write the pack's name, author and licence here before the game is shared --
+the folder it came in was the only record of where these are from, and moving
+the files here lost it.
+
+GameAudio picks one of these at random for every sword swing, never the same
+one twice in a row. Every clip here is a *swing*: silent for its first tenth
+of a second, then swelling to a peak around 0.3s. That is why MeleeSlash
+starts the sound at the wind-up instead of at the moment of impact.
+
+Adding or deleting takes needs no code -- the folder is read at runtime.
