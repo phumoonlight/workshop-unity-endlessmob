@@ -29,7 +29,8 @@ public class HowToPlayMenu : MonoBehaviour
         Key + "1 - 0" + End + "   use the item in that slot\n" +
         Key + "Hold E" + End + "   pick berries from a bush\n" +
         Key + "Mouse wheel" + End + "   zoom in and out\n" +
-        Key + "Esc" + End + "   pause\n\n" +
+        Key + "Esc" + End + "   pause\n" +
+        Key + "Gear button" + End + "   sound settings (top-right)\n\n" +
         "Your hero attacks the nearest enemy\nby themselves. You only move.";
 
     static readonly string Rules =

@@ -44,8 +44,9 @@ public class DebugHUD : MonoBehaviour
         }
 
         // Esc pauses and unpauses -- only when the game is running normally, so it
-        // can't fight the hero-select screen, which also stops time.
-        if (!GameStats.IsGameOver && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+        // can't fight the hero-select screen, which also stops time. While the
+        // settings window is open, Esc belongs to it (it closes the window).
+        if (!GameStats.IsGameOver && !SettingsMenu.IsOpen && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             if (paused)
             {
@@ -61,7 +62,7 @@ public class DebugHUD : MonoBehaviour
 
         // Leaving from the pause screen. RunBank banks everything as the scene
         // unloads, exactly as if the run had ended.
-        if (paused && Keyboard.current != null && Keyboard.current.mKey.wasPressedThisFrame)
+        if (paused && !SettingsMenu.IsOpen && Keyboard.current != null && Keyboard.current.mKey.wasPressedThisFrame)
             SceneManager.LoadScene("MainMenu");
 
         // (After the run ends, WaveHud's result panel has the buttons to retry
@@ -72,6 +73,10 @@ public class DebugHUD : MonoBehaviour
     void OnGUI()
     {
         if (player == null)
+            return;
+
+        // OnGUI draws on top of every canvas, so it would cover the settings window.
+        if (SettingsMenu.IsOpen)
             return;
 
         if (paused)

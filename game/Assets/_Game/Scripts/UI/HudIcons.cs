@@ -12,11 +12,12 @@ public static class HudIcons
 {
     const int Size = 64;
 
-    static Sprite coin, skull, clock;
+    static Sprite coin, skull, clock, gear;
 
     public static Sprite Coin => coin != null ? coin : (coin = Draw(PaintCoin));
     public static Sprite Skull => skull != null ? skull : (skull = Draw(PaintSkull));
     public static Sprite Clock => clock != null ? clock : (clock = Draw(PaintClock));
+    public static Sprite Gear => gear != null ? gear : (gear = Draw(PaintGear));
 
     delegate Color Painter(float x, float y);
 
@@ -33,7 +34,7 @@ public static class HudIcons
         return Sprite.Create(texture, new Rect(0, 0, Size, Size), new Vector2(0.5f, 0.5f), Size);
     }
 
-    // ---- The three icons (0,0 is bottom-left, 64,64 top-right) ---------------
+    // ---- The icons (0,0 is bottom-left, 64,64 top-right) ---------------
 
     static Color PaintCoin(float x, float y)
     {
@@ -74,6 +75,22 @@ public static class HudIcons
         c = Over(c, white, Segment(x, y, 32, 32, 44, 32, 2.5f)); // hour hand to 3
         c = Over(c, white, Circle(x, y, 32, 32, 3.5f));
         return c;
+    }
+
+    static Color PaintGear(float x, float y)
+    {
+        // Eight teeth = four thick bars crossing the centre, 45 degrees apart.
+        // Mathf.Min of two distances is "inside either shape" (a union).
+        float teeth = float.MaxValue;
+        for (int i = 0; i < 4; i++)
+        {
+            float angle = i * 45f * Mathf.Deg2Rad;
+            float dx = Mathf.Cos(angle) * 25f, dy = Mathf.Sin(angle) * 25f;
+            teeth = Mathf.Min(teeth, Segment(x, y, 32 - dx, 32 - dy, 32 + dx, 32 + dy, 11f));
+        }
+        float body = Coverage(Mathf.Min(teeth, Circle(x, y, 32, 32, 20)));
+        float hole = Coverage(Circle(x, y, 32, 32, 9));
+        return new Color(0.93f, 0.93f, 0.95f, body * (1f - hole));
     }
 
     // ---- Shapes as signed distances (negative = inside) ----------------------

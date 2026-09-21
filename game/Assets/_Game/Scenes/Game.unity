@@ -3611,6 +3611,7 @@ GameObject:
   - component: {fileID: 388898858}
   - component: {fileID: 388898859}
   - component: {fileID: 388898860}
+  - component: {fileID: 388898861}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -3807,6 +3808,27 @@ MonoBehaviour:
   iconSize: 40
   fontSize: 34
   rowSpacing: 50
+--- !u!114 &388898861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388898852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8870678eb753fd749a6c4f248944bd25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SettingsMenu
+  canvasRoot: {fileID: 388898857}
+  buttonSize: 56
+  buttonMargin: 16
+  buttonColor: {r: 0, g: 0, b: 0, a: 0.55}
+  panelColor: {r: 0.08, g: 0.09, b: 0.12, a: 0.97}
+  sliderColor: {r: 0.3, g: 0.85, b: 1, a: 1}
+  closeColor: {r: 0.35, g: 0.35, b: 0.4, a: 1}
+  resetColor: {r: 0.45, g: 0.3, b: 0.25, a: 1}
+  previewInterval: 0.25
 --- !u!1 &458169877
 GameObject:
   m_ObjectHideFlags: 0
@@ -5038,7 +5060,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16, y: -88}
+  m_AnchoredPosition: {x: -16, y: -132}
   m_SizeDelta: {x: 240, y: 510}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &602044310
@@ -17498,7 +17520,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16, y: -40}
+  m_AnchoredPosition: {x: -16, y: -84}
   m_SizeDelta: {x: 90, y: 40}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &2042746049

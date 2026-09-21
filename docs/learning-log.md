@@ -12,6 +12,7 @@ Unity topics covered so far, one per session, with the idea behind each. Add a l
 | Save / load | `PlayerProfile` | Save ids, not names. Write to a temp file and swap. Version the file and start fresh on mismatch. |
 | Building an .exe | [building.md](building.md) | Build profiles, what to ship, what to keep. |
 | Homing projectiles | `BouncingBlade` | Two ways to hit: fly straight and wait for a trigger collider (`Projectile`), or know the target and steer at it with `MoveTowards` (no collider needed, can't miss or overshoot). A `HashSet` remembers who was already hit. |
+| Settings and PlayerPrefs | `SoundSettings`, `SettingsMenu` | Preferences go in PlayerPrefs, progress in the save file. A uGUI `Slider` draws nothing itself: it moves the anchors of a fill and a handle you give it. Two scripts reading the same key in one frame: let one act in `LateUpdate`. |
 | Renaming a script | `BouncingBladeSkill` | Unity links components to scripts by the **guid in the `.meta`**, not the file name. Move the `.cs` and its `.meta` together and scenes keep working. |
 
 ## Lessons from this project's bugs

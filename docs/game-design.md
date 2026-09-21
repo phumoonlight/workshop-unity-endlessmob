@@ -20,6 +20,7 @@ It used to be a **castle-defense game with waves**. That mode is shelved, not de
 | E (hold 1 s) | Pick berries from a bush |
 | 1–0 | Eat a Berry from that inventory slot (refused at full health) |
 | Esc | Pause (M from the pause quits to the menu, keeping progress) |
+| Gear button (top-right) | Settings window — pauses the run. Sound only for now: master volume, sword swing, dagger throw. Esc or Close shuts it; volumes are remembered between sessions. |
 | F1 | DEV panel (editor and Development Builds only) |
 | F9 | Start / stop a performance recording (editor and Development Builds only) |
 

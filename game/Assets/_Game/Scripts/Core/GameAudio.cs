@@ -34,20 +34,8 @@ public class GameAudio : MonoBehaviour
     // Where real audio files are looked for, inside a Resources folder.
     const string SfxFolder = "Sfx/";
 
-    [Tooltip("Overall loudness of every sound effect. 0 = silent, 1 = full.")]
-    [Range(0f, 1f)]
-    [SerializeField] float masterVolume = 0.8f;
-
-    // Base loudness of single sounds, on top of the master volume. The files
-    // are all normalised (as loud as they can be), so the ones you hear
-    // constantly are turned down here or they drown out everything else.
-    [Tooltip("Sword swing loudness. 1 = the file's full volume.")]
-    [Range(0f, 1f)]
-    [SerializeField] float slashVolume = 0.5f;
-
-    [Tooltip("Dagger throw loudness. Lower than the sword: Rapid Fire plays it three times as often.")]
-    [Range(0f, 1f)]
-    [SerializeField] float shootVolume = 0.4f;
+    // Volumes are not fields here: they live in SoundSettings, where the
+    // settings window changes them and they are saved between sessions.
 
     [Tooltip("How many sounds can overlap. Past this, the oldest one is cut off.")]
     [SerializeField] int voiceCount = 16;
@@ -135,7 +123,7 @@ public class GameAudio : MonoBehaviour
 
         // A little random pitch so repeated hits don't sound like a machine.
         source.pitch = Random.Range(0.94f, 1.06f);
-        source.PlayOneShot(clip, volume * BaseVolume(sfx) * masterVolume);
+        source.PlayOneShot(clip, volume * BaseVolume(sfx) * SoundSettings.Master);
     }
 
     // Pick which take to play. Rolling again when we land on the one we just
@@ -155,13 +143,16 @@ public class GameAudio : MonoBehaviour
 
     // Getting hurt fires every frame while an enemy touches you, so it needs a
     // much longer gap than a one-off sound like a coin.
+    // Base loudness of single sounds, on top of the master volume. The files
+    // are all normalised (as loud as they can be), so the ones you hear
+    // constantly have their own slider or they drown out everything else.
     // Sounds without their own setting play at the file's full volume.
-    float BaseVolume(Sfx sfx)
+    static float BaseVolume(Sfx sfx)
     {
         switch (sfx)
         {
-            case Sfx.Slash: return slashVolume;
-            case Sfx.Shoot: return shootVolume;
+            case Sfx.Slash: return SoundSettings.Slash;
+            case Sfx.Shoot: return SoundSettings.Shoot;
             default: return 1f;
         }
     }
