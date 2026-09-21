@@ -2,17 +2,17 @@
 
 **Endless Mob** — a 3D Vampire-Survivors-style game in Unity 6000.6.2f1 (URP, Input System). Product name `EndlessMobPoc`, company `Iampumon`.
 
-The developer is **new to game development**: explain simply, keep changes small, teach the *why* behind each Unity idea.
+The developer is **new to game development**: explain simply, keep changes small, teach the *why* behind each Unity idea. They have asked for **simpler explanations**: start with an everyday picture (an enum is a traffic light), one idea at a time, short answers, a "in short" line when asked. Long multi-section replies confuse.
 
 ## Repository layout
 - `game/` — the Unity project (open this folder in Unity Hub). Has its own `.gitignore`.
 - `docs/` — human documentation, outside the project so Unity doesn't import it:
-  - `docs/game-design.md` — rules, controls, tuning numbers, known gaps
+  - `docs/game-design.md` — rules, controls, tuning numbers, the **playtest checklist**, known gaps
   - `docs/architecture.md` — how each system is coded, saving, HUD, performance, shelved code
   - `docs/building.md` — build and share the .exe
-  - `docs/learning-log.md` — topics covered with the developer
+  - `docs/learning-log.md` — topics covered with the developer, and **what to learn next** (start a teaching session here)
 
-**Read the relevant doc before touching a system**, and update it when the system changes. Player-facing rules also live in `HowToPlayMenu` (plain strings) — keep both in sync.
+**Read the relevant doc before touching a system**, and update it when the system changes. **Read the script itself before advising on it** — the docs don't list everything (`GameAudio` already had random pitch and a repeat limit; gems and coins have no collider), and a wrong suggestion costs the developer's trust. Player-facing rules also live in `HowToPlayMenu` (plain strings) — keep both in sync.
 
 ## Where things are (paths relative to `game/`)
 - `Assets/_Game/Scripts/` — all code: `Core`, `Player`, `Weapons`, `Skills`, `Enemies`, `Progression`, `City`, `Inventory`, `UI`, `Camera`
@@ -27,6 +27,8 @@ Claude's working directory is the **repo root**: shell, Grep and file-tool paths
 - Workflow: edit scripts → `unity command recompile`, poll `recompile_status` → wire scenes/prefabs with an `eval_file` script → `console_status` (`console --level error` for stack traces) → review → commit.
 - **Check `editor_status` for play mode first.** Saving scenes, creating assets and editing prefabs fail during play; ask the developer to press Stop.
 - **Keep token use low:** no screenshots, no playtesting. Compile-check, then the developer playtests and sends screenshots. State plainly what wasn't seen on screen.
+- **Every compile-checked-only change gets a block in the playtest checklist** (`docs/game-design.md`) with its commit hash and what to look for. When several blocks are open, prefer hands-on or read-only topics over more code, and say so.
+- It is an optimisation? **Measure first** (F9 → `Logs/PerfReport.txt`) and say honestly when the gain is a guess.
 - Verify player compilation without a full build: `PlayerBuildInterface.CompilePlayerScripts` for `StandaloneWindows64`.
 
 ### eval_file scripts
@@ -36,7 +38,8 @@ Claude's working directory is the **repo root**: shell, Grep and file-tool paths
 - Private `[SerializeField]`s: `new UnityEditor.SerializedObject(c).FindProperty("name")` + `ApplyModifiedPropertiesWithoutUndo()`. Set TMP text via `m_text` the same way.
 - Finish with `MarkSceneDirty` + save + `AssetDatabase.SaveAssets()`; `return` a short log string. Make scripts re-runnable (delete the object/asset first if it exists).
 - There is no `refresh` command: use `unity command eval "UnityEditor.AssetDatabase.Refresh(); return 0;"` after adding or deleting files from the shell. `recompile_status` ends as `completed` or `up_to_date`.
-- **Calls over ~5 s time out** but the work finishes — write results to a file and poll.
+- **Calls over ~5 s time out** but the work finishes — write results to a file and poll. Opening a scene or scanning every prefab is already over 5 s.
+- `AssetDatabase.Refresh()` compiles changed scripts by itself, so the `recompile` after it often answers `up_to_date`. To be sure the new code is live, `eval` something that touches it (`typeof(NewClass).Name`).
 - `EditorBuildSettings.scenes` reaches disk only after `unity command save_all`.
 - Use `FindAnyObjectByType` (with `FindObjectsInactive.Include` for disabled objects), not the deprecated `FindFirstObjectByType`.
 - Private statics via reflection are fine for tests (e.g. `PlayerProfile.Load` round-trips); restore the developer's save file afterwards.
@@ -44,6 +47,7 @@ Claude's working directory is the **repo root**: shell, Grep and file-tool paths
 ### Editing files from the shell
 - Backslashes get mangled by Python heredocs (`\n`, `\U`) and `sed` (`\U`/`\L`). **Anything containing backslashes: use the Edit tool.**
 - `assert old in s` before any string replacement.
+- A `cd` in the Bash tool **persists** into later calls. Start shell commands with an absolute `cd` to the repo root (or use absolute paths) rather than trusting where the last one ended.
 
 ## Unity rules learned the hard way
 - `Random` and most Unity APIs throw in field initializers and abandon the object's setup — initialise in `Awake`.
@@ -57,11 +61,14 @@ Claude's working directory is the **repo root**: shell, Grep and file-tool paths
 - `GameAudio` remembers a missing sound as missing until the next Play press — a new file in `Resources/Sfx/` needs Stop → Play.
 - A script rename keeps its scene links only if the `.cs` and `.meta` move together (`git mv` both).
 - Enemy renderers must be **destroyed, not disabled** (`Enemy.Update` re-enables them).
+- Every "find enemies" physics query passes `Layers.EnemyMask`, so **the root of a new enemy prefab must be on the `Enemy` layer** (slot 6) or no attack can hit it. A layer is a number (6); a mask is bits (`1 << 6`) — never pass one as the other.
+- Gems and coins are pooled: create them with `PickupPool.Spawn`, never `Instantiate`/`Destroy`. **`Awake` runs once per object, `OnEnable` on every reuse** — anything a pooled object changes about itself must be reset in `OnEnable`. Pickup spares die with the scene on purpose (unlike `Vfx`, which is `DontDestroyOnLoad`).
 
 ## Code conventions
 - Short, beginner-friendly comments explaining *why*, like the existing scripts.
 - `[SerializeField]` private fields with `[Tooltip]` for anything worth tuning.
-- Shared bases: `Weapon`, `ClassSkill`, `Structure`, `MagnetPickup`. Runtime-loaded things go in `Resources/` so adding one needs no wiring.
+- Shared bases: `Weapon`, `ClassSkill`, `Structure`, `MagnetPickup`. Shared helpers: `Layers` (physics layer names), `PickupPool`, `Vfx.Play`, `GameAudio.Play(sfx, volume, pitch)`, `UiFactory`.
+- One variable that is "which one of these" is an `enum` (`Enemy.Role`), not several `bool`s. Runtime-loaded things go in `Resources/` so adding one needs no wiring.
 - Menus are built in code with `UiFactory`; new panels call `SetAsLastSibling()` when opening.
 - Data assets: **Create > Endless Mob > …**.
 

@@ -70,19 +70,41 @@ The shop (pre-start screen) checks for stash room **before** taking coins. Coins
 ## Shelved mode
 The castle-defense mode is switched off but its code and scene objects remain: the Castle with corner archers and upgrades, wave manager, castle health bar, chest spawner, wilderness scouts, fog of war, building (Barracks, Towers, Builder huts, outposts). See [architecture.md](architecture.md#shelved-systems) for what is disabled where.
 
+## Playtest checklist
+Everything here was **compile-checked only** - nobody has seen it run. Tick a box when checked, and delete the block once all its boxes are ticked. If something is broken, `git log` has one commit per block, so it can be undone on its own.
+
+**Assassin rework and settings window** (before 2026-09-22)
+- [ ] The dagger flies point-first and is big enough to read.
+- [ ] Bouncing Blade hops correctly; the final-strike blade is not too strong under Rapid Fire.
+- [ ] Rapid Fire at 3x looks acceptable with the bow animation.
+- [ ] Gear icon, slider layout and drag feel; Esc closes settings *before* it pauses; the DEV button and panel in their new spot.
+
+**Enemy physics layer** (2026-09-22, commit `fba6f59`)
+- [ ] Both heroes' attacks, Whirlwind, Bouncing Blade and the final-strike blade still hit all four enemy kinds.
+- [ ] Enemies inside a camp circle still slow the capture.
+- [ ] The Console shows no "is not on the 'Enemy' layer" warning.
+
+**Pooled gems and coins** (2026-09-22, commit `0495100`)
+- [ ] A dropped gem sits and spins until you walk near (not already flying) and flies in at the normal speed - also late in a run.
+- [ ] Camp loot still scatters.
+- [ ] After TRY AGAIN no old gems are on the ground, and new ones still drop.
+
+**Enemy Role enum** (2026-09-22, commit `7b2ca29`) - behaviour should be unchanged
+- [ ] Spawned enemies still run straight at the hero, and stand still when the hero is down.
+- [ ] Camp guards stay at their camp, chase a hero who comes close, and walk home when the hero leaves.
+
+**Combo pitch** (2026-09-22, commit `50e2e39`)
+- [ ] Both heroes' three strikes sound like "one, two, THREE" (pitch 1 / 1.1 / 0.85 - `Chain Pitch` on the weapon in the Inspector). If the final strike sounds muddy or the second squeaky, move the numbers closer to 1.
+
 ## Known gaps and ideas
-- **Waiting for a first playtest (added 2026-09-22, compile-checked only):** the dagger flies point-first and is big enough to read; Bouncing Blade hops correctly and the final-strike blade is not too strong under Rapid Fire; Rapid Fire at 3× looks acceptable with the bow animation; the gear icon, slider layout and drag feel; Esc closes settings *before* it pauses; the DEV button and panel in their new spot. Delete this line once checked.
-- **Also waiting for a playtest (2026-09-22, compile-checked only):** attacks now search the `Enemy` physics layer only. Check that both heroes' attacks, Whirlwind, Bouncing Blade and the final-strike blade still hit all four enemy kinds, that enemies inside a camp circle still slow the capture, and that the Console shows no "is not on the 'Enemy' layer" warning. Delete this line once checked.
-- **Also waiting for a playtest (2026-09-22, compile-checked only):** XP gems and coins are now reused from a pool. Check that a dropped gem sits and spins until you walk near (not already flying), flies in at the normal speed, that camp loot still scatters, and that after TRY AGAIN no old gems are on the ground and new ones still drop. Delete this line once checked.
-- **Also waiting for a playtest (2026-09-22, compile-checked only):** the combo's three strikes now play at different pitches (1 / 1.1 / 0.85, `Chain Pitch` on the weapon in the Inspector). Listen for "one, two, THREE" on both heroes; if the final strike sounds muddy or the second one squeaky, move the numbers closer to 1. Delete this line once checked.
 - **Sound licences:** `Resources/Sfx/Slash/ABOUT.txt` guesses the slash sound is from Pixabay; the dagger throw (`Shoot.ogg`) has no source written down at all. Record both before sharing the game.
 - The settings window exists only in the run; the main menu and pre-start screen have no way to change volume.
 - **Two survival clocks** show (top-centre and top-left) — decide which to keep.
 - **Icons are placeholders** drawn in code; items are coloured squares. A small sprite set (coin, heart, sword, berry) would replace them.
 - **Balance is untested:** spawn curve, health growth, Brute timing, class XP curve, prices, Relic/Armor strength, capture speed with enemies inside.
 - **Lighting:** one directional light and the default skybox; a warmer-light/sky pass was skipped.
-- **Audio:** only sword swings and the Assassin's dagger throw (`Shoot`) exist. `Hit` (impacts) is the most-missed sound. Real audio files, not synthesized ones.
+- **Audio:** only sword swings and the Assassin's dagger throw (`Shoot`) exist. `Hit` (impacts) is the most-missed sound, then `Gem`, then `EnemyDie` / `PlayerHurt` / `LevelUp` / `Coin`. Real audio files, not synthesized ones — the code needs nothing: drop `Hit.ogg` (or a `Hit/` folder of takes) into `Resources/Sfx/`, then Stop → Play. kenney.nl audio packs are CC0. Once `Gem` has a file: make quick pickups climb in pitch (a few lines in `ExperienceGem`, using `GameAudio.Play`'s pitch). No music yet.
 - Enemies only walk (no attack or death animations); Q/R skills reuse the normal swing; the Swordsman has no R skill.
 - Particles don't cover skills, the Brute's slam, or daggers in flight.
 - The Assassin still **holds a bow and plays the bow animations** while throwing daggers. The Haons pack has twin-dagger props and a `WeaponMaster Twin dagger(WTD)` animation set that could replace them.
-- Performance ideas if it ever stutters: dormant camps (spawn guards only when the hero is near) and letting idle enemy rigidbodies sleep.
+- Performance ideas if it ever stutters: dormant camps (spawn guards only when the hero is near) and letting idle enemy rigidbodies sleep. Pooling enemies like the pickups is possible but **measure first** (F9 before and after): the first measurement said spawning was not the cost, and a pooled enemy must reset health, `Role`, lock-on, hit flash and the alive counter.
