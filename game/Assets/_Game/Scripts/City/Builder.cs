@@ -64,7 +64,7 @@ public class Builder : MonoBehaviour
 
     void TakeContactDamage()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, contactRange, hits);
+        int count = Physics.OverlapSphereNonAlloc(transform.position, contactRange, hits, Layers.EnemyMask);
         int touching = 0;
         for (int i = 0; i < count; i++)
             if (hits[i].TryGetComponent(out Enemy _))

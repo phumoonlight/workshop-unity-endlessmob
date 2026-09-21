@@ -43,7 +43,7 @@ public class BouncingBladeSkill : ClassSkill
     {
         Enemy nearest = null;
         float best = float.MaxValue;
-        int count = Physics.OverlapSphereNonAlloc(transform.position, aimRange, hits);
+        int count = Physics.OverlapSphereNonAlloc(transform.position, aimRange, hits, Layers.EnemyMask);
         for (int i = 0; i < count; i++)
         {
             if (!hits[i].TryGetComponent(out Enemy enemy))

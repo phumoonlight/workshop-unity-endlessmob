@@ -14,6 +14,7 @@ Unity topics covered so far, one per session, with the idea behind each. Add a l
 | Homing projectiles | `BouncingBlade` | Two ways to hit: fly straight and wait for a trigger collider (`Projectile`), or know the target and steer at it with `MoveTowards` (no collider needed, can't miss or overshoot). A `HashSet` remembers who was already hit. |
 | Settings and PlayerPrefs | `SoundSettings`, `SettingsMenu` | Preferences go in PlayerPrefs, progress in the save file. A uGUI `Slider` draws nothing itself: it moves the anchors of a fill and a handle you give it. Two scripts reading the same key in one frame: let one act in `LateUpdate`. |
 | Renaming a script | `BouncingBladeSkill` | Unity links components to scripts by the **guid in the `.meta`**, not the file name. Move the `.cs` and its `.meta` together and scenes keep working. |
+| Physics layers | `Layers`, enemy prefabs | A layer is a label on a GameObject; a **layer mask** tells a physics query which labels to look at, so it skips the rest before your code runs. A layer is a number (6); a mask is 32 on/off bits (`1 << 6` = 64) — passing the number where a mask is wanted is the classic bug. Next step not done yet: the **collision matrix** (Project Settings > Physics) decides which layers bump into each other at all. |
 
 ## Lessons from this project's bugs
 - **`Random` and most Unity APIs can't run in a field initializer.** It throws in the constructor and the rest of the object's setup is abandoned. Initialise in `Awake`.

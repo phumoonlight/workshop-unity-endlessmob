@@ -89,7 +89,7 @@ public class BouncingBlade : MonoBehaviour
     // The nearest enemy in bounce range that this blade hasn't hit yet.
     Enemy FindNextTarget()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, bounceRange, nearby);
+        int count = Physics.OverlapSphereNonAlloc(transform.position, bounceRange, nearby, Layers.EnemyMask);
 
         Enemy nearest = null;
         float nearestDistance = float.MaxValue;

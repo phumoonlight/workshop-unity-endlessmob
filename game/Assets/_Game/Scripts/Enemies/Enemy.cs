@@ -104,6 +104,15 @@ public class Enemy : MonoBehaviour
     {
         aliveCount++;
 
+        // Every attack searches the Enemy layer only (see Layers), so an enemy
+        // on any other layer could never be hit. The prefabs are set in the
+        // Inspector; this catches a new prefab where that was forgotten.
+        if (gameObject.layer != Layers.Enemy && Layers.Enemy >= 0)
+        {
+            Debug.LogWarning($"{name} is not on the '{Layers.EnemyName}' layer. Fixed for now -- set it on the prefab.", this);
+            gameObject.layer = Layers.Enemy;
+        }
+
         // Stagger the first building scan so a wave spawned on one frame does
         // not all scan on the same frame afterwards.
         nextBuildingScan = Time.time + Random.Range(0f, buildingScanInterval);

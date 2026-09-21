@@ -61,7 +61,7 @@ public class Soldier : MonoBehaviour
 
     void TakeContactDamage()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, contactRange, hits);
+        int count = Physics.OverlapSphereNonAlloc(transform.position, contactRange, hits, Layers.EnemyMask);
         int touching = 0;
         for (int i = 0; i < count; i++)
             if (hits[i].TryGetComponent(out Enemy _))
@@ -74,7 +74,7 @@ public class Soldier : MonoBehaviour
 
     Enemy FindNearestEnemy(Vector3 center, float range)
     {
-        int count = Physics.OverlapSphereNonAlloc(center, range, hits);
+        int count = Physics.OverlapSphereNonAlloc(center, range, hits, Layers.EnemyMask);
         Enemy nearest = null;
         float best = float.MaxValue;
         for (int i = 0; i < count; i++)

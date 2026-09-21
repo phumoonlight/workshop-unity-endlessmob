@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 6543349672745719651}
   - component: {fileID: 1199615582511168383}
   - component: {fileID: 5393920918411934888}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyBrute
   m_TagString: Untagged
   m_Icon: {fileID: 0}

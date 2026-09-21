@@ -90,7 +90,7 @@ public class CampCapture : MonoBehaviour
 
     bool IsAnyEnemyInside()
     {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, radius, hits);
+        int count = Physics.OverlapSphereNonAlloc(transform.position, radius, hits, Layers.EnemyMask);
         for (int i = 0; i < count; i++)
             if (hits[i].TryGetComponent(out Enemy enemy) && FlatDistance(enemy.transform.position, transform.position) < radius)
                 return true;

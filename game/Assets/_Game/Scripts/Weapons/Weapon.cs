@@ -126,7 +126,9 @@ public abstract class Weapon : MonoBehaviour
     // Shared helper: the closest enemy within range, or null if there is none.
     protected static Enemy FindNearestEnemy(Vector3 position, float range, Collider[] buffer)
     {
-        int count = Physics.OverlapSphereNonAlloc(position, range, buffer);
+        // The mask makes physics return enemies only, instead of every
+        // collider in range (ground, gems, coins, bushes...). See Layers.
+        int count = Physics.OverlapSphereNonAlloc(position, range, buffer, Layers.EnemyMask);
 
         Enemy nearest = null;
         float nearestDistance = float.MaxValue;

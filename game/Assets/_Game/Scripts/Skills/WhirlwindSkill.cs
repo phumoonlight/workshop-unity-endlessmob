@@ -79,7 +79,7 @@ public class WhirlwindSkill : ClassSkill
     void HitAround()
     {
         float damage = damagePerHit * weapon.DamageMultiplier;
-        int count = Physics.OverlapSphereNonAlloc(transform.position, radius, hits);
+        int count = Physics.OverlapSphereNonAlloc(transform.position, radius, hits, Layers.EnemyMask);
         for (int i = 0; i < count; i++)
             if (hits[i].TryGetComponent(out Enemy enemy))
                 enemy.TakeDamage(damage);

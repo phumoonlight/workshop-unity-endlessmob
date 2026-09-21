@@ -103,7 +103,7 @@ public class MeleeSlash : Weapon
         float halfArc = Mathf.Min(arcAngle * areaMultiplier * size, 360f) / 2f;
 
         // Hit every enemy that is in range AND inside the arc.
-        int count = Physics.OverlapSphereNonAlloc(transform.position, reach, hits);
+        int count = Physics.OverlapSphereNonAlloc(transform.position, reach, hits, Layers.EnemyMask);
         int landed = 0;
         for (int i = 0; i < count; i++)
         {
