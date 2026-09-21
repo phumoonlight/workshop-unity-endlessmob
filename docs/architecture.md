@@ -22,7 +22,7 @@ Data assets are created from **Create > Endless Mob > Building / Item / Player C
 
 ## The run
 - **`EnemySpawner`** owns the pressure. The spawn ring sits just past the screen corners and is re-measured each frame (zoom changes it); it tries up to 8 times to find a truly off-screen spot near the map edge. Every second, enemies more than 2.2× the ring radius away are teleported back to the edge. `HealthMultiplier` (+8 %/min) is also read by camps. Spawned enemies call `Enemy.HuntPlayerOnly()`, stricter than the older `HuntPlayer()` used by wilderness scouts (which still considers buildings).
-- **`PlayerHealth.deathEndsRun`** (on) ends the run on death; off restores the old respawn. `WaveHud` kept its name but shows the survival clock and the end-of-run summary.
+- **`PlayerHealth.deathEndsRun`** (on) ends the run on death; off restores the old respawn. `WaveHud` kept its name but shows the survival clock and, when the run ends, builds the result panel in code (`UiFactory`, on the clock's root canvas — no scene wiring): dark veil, title, icon columns for time / kills / coins, class strip, key hints. It fades in with `Time.unscaledDeltaTime` because the game is frozen. The R / M keys are still read by `DebugHUD`.
 - **Pause** lives in `DebugHUD`: Esc stops time only when it is running normally, so it cannot unfreeze the hero-select panel. This codebase uses `Time.timeScale == 0` to mean "paused", and prompts check it.
 
 ## Camps
