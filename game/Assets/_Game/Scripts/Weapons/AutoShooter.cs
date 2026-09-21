@@ -18,8 +18,18 @@ public class AutoShooter : Weapon
     [Tooltip("Angle in degrees between arrows when firing more than one.")]
     [SerializeField] float spreadAngle = 12f;
 
-    [Tooltip("Extra arrows on the combo's final strike.")]
-    [SerializeField] int finalStrikeExtraArrows = 1;
+    [Header("Final strike: a small bouncing blade")]
+    [Tooltip("Thrown along with the daggers on the combo's final strike. Leave empty for none.")]
+    [SerializeField] BouncingBlade finalStrikeBladePrefab;
+
+    [Tooltip("How many enemies the small blade can hit (the Q skill's blade hits 20).")]
+    [SerializeField] int finalStrikeBladeTargets = 5;
+
+    [Tooltip("The small blade's damage, as a share of the Q skill blade's. 0.5 = half.")]
+    [SerializeField] float finalStrikeBladeDamage = 0.5f;
+
+    [Tooltip("The small blade's size next to the Q skill's blade, so you can tell them apart.")]
+    [SerializeField] float finalStrikeBladeSize = 0.6f;
 
     int projectilesPerShot = 1; // raised by the Multishot upgrade
 
@@ -36,6 +46,7 @@ public class AutoShooter : Weapon
     Enemy pendingTarget;
     float pendingStrike;
     int pendingArrows;
+    bool pendingIsFinal;
 
     // "override" replaces the do-nothing version from Weapon.
     public override void AddProjectiles(int count) => projectilesPerShot += count;
@@ -54,9 +65,10 @@ public class AutoShooter : Weapon
 
         cooldown = fireInterval / attackSpeedMultiplier;
 
-        // Chain attack: 100% -> 125% -> 150%, and the final strike fires an extra arrow.
+        // Chain attack: 100% -> 125% -> 150%, and the final strike also throws
+        // a small bouncing blade (it used to be one extra arrow).
         float strike = NextChainStrike(out bool isFinal);
-        int arrows = projectilesPerShot + (isFinal ? finalStrikeExtraArrows : 0);
+        int arrows = projectilesPerShot;
         PlayAttackAnimation();
 
         // Remember the shot; OnImpact fires it when the animation reaches the
@@ -69,6 +81,7 @@ public class AutoShooter : Weapon
         pendingTarget = target;
         pendingStrike = strike;
         pendingArrows = arrows;
+        pendingIsFinal = isFinal;
     }
 
     // The moment the arrow is released, announced by the animation itself.
@@ -80,6 +93,7 @@ public class AutoShooter : Weapon
         Enemy target = pendingTarget;
         float strike = pendingStrike;
         int arrows = pendingArrows;
+        bool isFinal = pendingIsFinal;
 
         GameAudio.Play(GameAudio.Sfx.Shoot);
 
@@ -104,5 +118,18 @@ public class AutoShooter : Weapon
             Projectile arrow = Instantiate(projectilePrefab, origin, rotation);
             arrow.Launch(damageMultiplier * strike, ProjectileSpeedMultiplier);
         }
+
+        if (isFinal && finalStrikeBladePrefab != null)
+            ThrowSmallBlade(target, origin, aim, strike);
+    }
+
+    // The final strike's bonus: the same blade as the Q skill, but smaller,
+    // weaker and with fewer bounces. If the target already died, the blade
+    // looks for another enemy by itself (or vanishes if there is none).
+    void ThrowSmallBlade(Enemy target, Vector3 origin, Quaternion aim, float strike)
+    {
+        BouncingBlade blade = Instantiate(finalStrikeBladePrefab, origin, aim);
+        blade.transform.localScale *= finalStrikeBladeSize;
+        blade.Launch(target, damageMultiplier * strike * finalStrikeBladeDamage, finalStrikeBladeTargets);
     }
 }

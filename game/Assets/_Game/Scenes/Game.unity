@@ -1052,7 +1052,10 @@ MonoBehaviour:
   range: 15
   fireHeight: 0
   spreadAngle: 12
-  finalStrikeExtraArrows: 1
+  finalStrikeBladePrefab: {fileID: 1545639557201092922, guid: 152f8caab2090414ba90c9b746bc166a, type: 3}
+  finalStrikeBladeTargets: 5
+  finalStrikeBladeDamage: 0.5
+  finalStrikeBladeSize: 0.6
   fallbackReleaseDelay: 0.45
 --- !u!114 &74354477
 MonoBehaviour:
