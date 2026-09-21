@@ -64,14 +64,8 @@ public class DebugHUD : MonoBehaviour
         if (paused && Keyboard.current != null && Keyboard.current.mKey.wasPressedThisFrame)
             SceneManager.LoadScene("MainMenu");
 
-        // After the run ends: R restarts this scene, M goes back to the main menu.
-        if (GameStats.IsGameOver && Keyboard.current != null)
-        {
-            if (Keyboard.current.rKey.wasPressedThisFrame)
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            else if (Keyboard.current.mKey.wasPressedThisFrame)
-                SceneManager.LoadScene("MainMenu");
-        }
+        // (After the run ends, WaveHud's result panel has the buttons to retry
+        // or go back to the menu.)
     }
 
     // OnGUI is Unity's old, simple UI system. Fine for debugging, not for a real game.

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // The survival clock at the top of the screen, and the result panel when the
@@ -20,6 +21,8 @@ public class WaveHud : MonoBehaviour
     [SerializeField] Color titleColor = new Color(1f, 0.31f, 0.31f);
     [SerializeField] Color coinColor = new Color(1f, 0.85f, 0.3f);
     [SerializeField] Color labelColor = new Color(0.63f, 0.65f, 0.7f);
+    [SerializeField] Color retryColor = new Color(0.20f, 0.55f, 0.30f);
+    [SerializeField] Color menuColor = new Color(0.35f, 0.35f, 0.40f);
     [Tooltip("Seconds for the panel to fade in.")]
     [SerializeField] float fadeSeconds = 0.4f;
 
@@ -70,7 +73,7 @@ public class WaveHud : MonoBehaviour
         Transform canvasRoot = infoText.canvas.rootCanvas.transform;
 
         // A dark veil over the whole screen, then the panel on top of it.
-        GameObject veil = UiFactory.Box("RunResult", canvasRoot, Vector2.zero, new Vector2(4000f, 4000f), veilColor).gameObject;
+        GameObject veil = UiFactory.Box("RunResult", canvasRoot, Vector2.zero, new Vector2(4000f, 4000f), veilColor, blocksClicks: true).gameObject;
         veil.transform.SetAsLastSibling(); // drawn last = drawn on top
 
         // A CanvasGroup's alpha fades everything under it at once.
@@ -110,13 +113,22 @@ public class WaveHud : MonoBehaviour
                            TextAlignmentOptions.Right, $"<color=#80c8ff>+{bank.ClassXpGained} class XP</color>");
         }
 
-        UiFactory.Text("CarryOver", box, new Vector2(0f, -160f), new Vector2(860f, 40f), 24f,
-                       TextAlignmentOptions.Center, "Your inventory carries over").color = labelColor;
+        // Buttons still work while the game is frozen: UI clicks don't depend
+        // on timeScale. The Game scene already has the EventSystem they need.
+        Button retry = UiFactory.Button("TryAgain", box, new Vector2(-170f, -205f), new Vector2(300f, 76f),
+                                        retryColor, "TRY AGAIN", out _);
+        retry.onClick.AddListener(Retry);
 
-        // The keys themselves are read by DebugHUD; this only tells the player.
-        UiFactory.Text("Keys", box, new Vector2(0f, -225f), new Vector2(860f, 50f), 32f, TextAlignmentOptions.Center,
-                       "<color=#ffd24a>R</color>  try again          <color=#ffd24a>M</color>  main menu");
+        Button menu = UiFactory.Button("MainMenu", box, new Vector2(170f, -205f), new Vector2(300f, 76f),
+                                       menuColor, "MAIN MENU", out _);
+        menu.onClick.AddListener(ToMainMenu);
     }
+
+    // Reloading the scene we are in starts a fresh run with the same hero.
+    // RunBank has already saved everything by now.
+    void Retry() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    void ToMainMenu() => SceneManager.LoadScene("MainMenu");
 
     void BuildStat(Transform box, float x, Sprite icon, string value, string label, Color valueColor)
     {
