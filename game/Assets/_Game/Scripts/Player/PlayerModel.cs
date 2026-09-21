@@ -11,7 +11,7 @@ public class PlayerModel : MonoBehaviour
     [Tooltip("The character shown for the Swordsman.")]
     [SerializeField] GameObject swordModel;
 
-    [Tooltip("The character shown for the Archer.")]
+    [Tooltip("The character shown for the Assassin (was the Archer).")]
     [SerializeField] GameObject bowModel;
 
     [Tooltip("How quickly the animation eases between standing, walking and running.")]

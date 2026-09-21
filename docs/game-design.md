@@ -4,7 +4,7 @@ A 3D Vampire-Survivors-style action game. Survive as long as you can while enemi
 
 ## The loop
 1. **Main menu** — PLAY, HOW TO PLAY, QUIT.
-2. **Pre-start** — pick a hero (Swordsman or Archer), see each class's level and your coins, visit the SHOP, then START.
+2. **Pre-start** — pick a hero (Swordsman or Assassin), see each class's level and your coins, visit the SHOP, then START.
 3. **The run** — enemies spawn endlessly and rush you; the longer you last, the faster and tougher they get. Dying ends the run.
 4. **After the run** — the run's coins, items and XP are banked. The result panel has two buttons: **TRY AGAIN** retries with the same hero, **MAIN MENU** returns to the main menu.
 
@@ -15,13 +15,17 @@ It used to be a **castle-defense game with waves**. That mode is shelved, not de
 |---|---|
 | WASD | Move (sprint drains stamina) |
 | Auto | Attack — a 3-hit chain at 100 / 125 / 150 % damage |
-| Q | Class skill, unlocks at stage level 10 (Whirlwind / Barrage) |
-| R | Second skill, unlocks at stage level 5 (Archer's Rapid Fire; Swordsman has none yet) |
+| Q | Class skill, unlocks at stage level 10 (Whirlwind / Bouncing Blade) |
+| R | Second skill, unlocks at stage level 5 (Assassin's Rapid Fire; Swordsman has none yet) |
 | E (hold 1 s) | Pick berries from a bush |
 | 1–0 | Eat a Berry from that inventory slot (refused at full health) |
 | Esc | Pause (M from the pause quits to the menu, keeping progress) |
 | F1 | DEV panel (editor and Development Builds only) |
 | F9 | Start / stop a performance recording (editor and Development Builds only) |
+
+**Assassin skills** (the class was the Archer until 2026-09; same save id, so its progress carried over):
+- **Bouncing Blade (Q)** — throws one dagger at the nearest enemy within 20 m. After each hit it jumps to the nearest enemy within 10 m that it has not hit yet, up to **20 targets**, 15 damage each (× ATK). With no enemy in range the key does nothing and the cooldown is not spent. Cooldown 5 s.
+- **Rapid Fire (R)** — for 6 s: +200 % attack speed (three times as fast) and daggers fly 2.2× faster. Was +100 % / 1.8×. Cooldown 15 s.
 
 `HowToPlayMenu` is the in-game copy of these rules — update it whenever controls change.
 
@@ -71,5 +75,6 @@ The castle-defense mode is switched off but its code and scene objects remain: t
 - **Lighting:** one directional light and the default skybox; a warmer-light/sky pass was skipped.
 - **Audio:** only sword swings exist. `Hit` (impacts) is the most-missed sound. Real audio files, not synthesized ones.
 - Enemies only walk (no attack or death animations); Q/R skills reuse the normal swing; the Swordsman has no R skill.
-- Particles don't cover skills, the Brute's slam, or arrows in flight.
+- Particles don't cover skills, the Brute's slam, or daggers in flight.
+- The Assassin still **holds a bow and plays the bow animations** while throwing daggers. The Haons pack has twin-dagger props and a `WeaponMaster Twin dagger(WTD)` animation set that could replace them.
 - Performance ideas if it ever stutters: dormant camps (spawn guards only when the hero is near) and letting idle enemy rigidbodies sleep.

@@ -1,16 +1,16 @@
 using UnityEngine;
 
-// Archer skill: for a few seconds, shoot much faster and your arrows fly faster.
+// Assassin skill: for a few seconds, throw much faster and your daggers fly faster.
 public class RapidFireSkill : ClassSkill
 {
     [SerializeField] AutoShooter bow;
     [SerializeField] float duration = 6f;
 
-    [Tooltip("Extra attack speed while active, in percent. 100 = twice as fast.")]
-    [SerializeField] float attackSpeedPercent = 100f;
+    [Tooltip("Extra attack speed while active, in percent. 100 = twice as fast, 200 = three times.")]
+    [SerializeField] float attackSpeedPercent = 200f;
 
-    [Tooltip("Arrow speed while active, as a multiple of normal. 1.8 = 80% faster.")]
-    [SerializeField] float projectileSpeedMultiplier = 1.8f;
+    [Tooltip("Dagger speed while active, as a multiple of normal. 2.2 = 120% faster.")]
+    [SerializeField] float projectileSpeedMultiplier = 2.2f;
 
     float timeLeft;
 

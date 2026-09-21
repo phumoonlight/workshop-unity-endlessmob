@@ -11,6 +11,8 @@ Unity topics covered so far, one per session, with the idea behind each. Add a l
 | Post-processing | `Assets/_Game/Settings/` | URP Volumes blend profiles by weight; a second Volume with a higher priority can fade in an effect (low-health red). |
 | Save / load | `PlayerProfile` | Save ids, not names. Write to a temp file and swap. Version the file and start fresh on mismatch. |
 | Building an .exe | [building.md](building.md) | Build profiles, what to ship, what to keep. |
+| Homing projectiles | `BouncingBlade` | Two ways to hit: fly straight and wait for a trigger collider (`Projectile`), or know the target and steer at it with `MoveTowards` (no collider needed, can't miss or overshoot). A `HashSet` remembers who was already hit. |
+| Renaming a script | `BouncingBladeSkill` | Unity links components to scripts by the **guid in the `.meta`**, not the file name. Move the `.cs` and its `.meta` together and scenes keep working. |
 
 ## Lessons from this project's bugs
 - **`Random` and most Unity APIs can't run in a field initializer.** It throws in the constructor and the rest of the object's setup is abandoned. Initialise in `Awake`.

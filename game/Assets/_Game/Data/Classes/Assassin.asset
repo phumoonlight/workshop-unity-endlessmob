@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f076bb08e37c2a24cad6265b485579c9, type: 3}
-  m_Name: Archer
+  m_Name: Assassin
   m_EditorClassIdentifier: Assembly-CSharp::PlayerClassData
   id: 2
-  displayName: Archer
-  description: 'Shoots arrows at the nearest enemy from far away.
+  displayName: Assassin
+  description: 'Throws daggers at the nearest enemy from far away.
 
 
     <color=#ffd24a>100 HP
 
-    Long range, can fire many arrows</color>'
+    Long range, blades bounce between enemies</color>'
   weapon: 1
   maxHealth: 100
   moveSpeedBonusPercent: 0

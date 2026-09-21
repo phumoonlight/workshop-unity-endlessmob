@@ -1,6 +1,7 @@
 using UnityEngine;
 
-// The Archer's weapon: automatically fires arrows at the nearest enemy in range.
+// The Assassin's weapon: automatically throws daggers at the nearest enemy in range.
+// (It began as the Archer's bow, which is why the code still says "arrows".)
 public class AutoShooter : Weapon
 {
     [SerializeField] Projectile projectilePrefab;

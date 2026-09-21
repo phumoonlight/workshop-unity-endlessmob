@@ -1047,7 +1047,7 @@ MonoBehaviour:
   - 1.25
   - 1.5
   chainResetTime: 2
-  projectilePrefab: {fileID: 7454965219740329099, guid: d7b6fe071f5f3ed49bff5a63e1ecd328, type: 3}
+  projectilePrefab: {fileID: 7602978344304995589, guid: f31eb439528ee91498d9dcdc024837ed, type: 3}
   fireInterval: 0.5
   range: 15
   fireHeight: 0
@@ -1189,17 +1189,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60539b42dbf9b1f468cbde8f2e36c83b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BarrageSkill
-  displayName: Barrage
+  displayName: Bouncing Blade
   unlockLevel: 10
   cooldown: 5
-  arrowPrefab: {fileID: 7454965219740329099, guid: d7b6fe071f5f3ed49bff5a63e1ecd328, type: 3}
+  bladePrefab: {fileID: 1545639557201092922, guid: 152f8caab2090414ba90c9b746bc166a, type: 3}
   weapon: {fileID: 74354476}
-  volleys: 3
-  arrowsPerVolley: 12
-  arcAngle: 120
-  volleyInterval: 0.15
+  maxTargets: 20
   aimRange: 20
-  arrowHeight: 0.7
+  throwHeight: 0.7
 --- !u!114 &74354485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1270,8 +1267,8 @@ MonoBehaviour:
   cooldown: 15
   bow: {fileID: 74354476}
   duration: 6
-  attackSpeedPercent: 100
-  projectileSpeedMultiplier: 1.8
+  attackSpeedPercent: 200
+  projectileSpeedMultiplier: 2.2
 --- !u!114 &74354488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10680,6 +10677,15 @@ MonoBehaviour:
   spawner: {fileID: 2030083007}
   bank: {fileID: 1940651035}
   infoText: {fileID: 1203452869}
+  veilColor: {r: 0, g: 0, b: 0, a: 0.6}
+  panelColor: {r: 0.08, g: 0.09, b: 0.12, a: 0.97}
+  stripColor: {r: 1, g: 1, b: 1, a: 0.06}
+  titleColor: {r: 1, g: 0.31, b: 0.31, a: 1}
+  coinColor: {r: 1, g: 0.85, b: 0.3, a: 1}
+  labelColor: {r: 0.63, g: 0.65, b: 0.7, a: 1}
+  retryColor: {r: 0.2, g: 0.55, b: 0.3, a: 1}
+  menuColor: {r: 0.35, g: 0.35, b: 0.4, a: 1}
+  fadeSeconds: 0.4
 --- !u!1 &1401507658
 GameObject:
   m_ObjectHideFlags: 0

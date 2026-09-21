@@ -25,7 +25,7 @@ public abstract class ClassSkill : MonoBehaviour
 
     public bool TryActivate()
     {
-        if (CooldownLeft > 0f || IsRunning)
+        if (CooldownLeft > 0f || IsRunning || !CanActivate())
             return false;
         Activate();
         wasRunning = true;
@@ -33,6 +33,10 @@ public abstract class ClassSkill : MonoBehaviour
             StartCooldown(); // instant skills start their cooldown right away
         return true;
     }
+
+    // A skill can refuse to fire (e.g. no enemy to throw at), so the key press
+    // doesn't waste its cooldown. By default a skill can always fire.
+    protected virtual bool CanActivate() => true;
 
     protected abstract void Activate();
 
