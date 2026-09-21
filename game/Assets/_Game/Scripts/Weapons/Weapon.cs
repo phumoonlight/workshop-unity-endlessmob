@@ -9,6 +9,9 @@ public abstract class Weapon : MonoBehaviour
     [Tooltip("Damage of each strike in the combo, in order. The last one is the final strike.")]
     [SerializeField] float[] chainDamage = { 1f, 1.25f, 1.5f };
 
+    [Tooltip("Pitch of the attack sound for each strike in the combo, in order. 1 = as recorded. Rising then dropping low makes the ear hear 'one, two, THREE' instead of the same swing three times.")]
+    [SerializeField] float[] chainPitch = { 1f, 1.1f, 0.85f };
+
     [Tooltip("If there's no attack for this many seconds, the combo starts over.")]
     [SerializeField] float chainResetTime = 2f;
 
@@ -22,6 +25,9 @@ public abstract class Weapon : MonoBehaviour
     // Which strike of the combo we just made (0, 1, 2). The attack animation
     // plays the swing that matches it.
     protected int LastChainStep { get; private set; }
+
+    // The sound pitch that goes with that strike (1 if the list is too short).
+    protected float LastChainPitch => LastChainStep < chainPitch.Length ? chainPitch[LastChainStep] : 1f;
 
     PlayerModel model;
     bool lookedForModel;

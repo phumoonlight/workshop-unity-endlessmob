@@ -47,6 +47,7 @@ public class AutoShooter : Weapon
     float pendingStrike;
     int pendingArrows;
     bool pendingIsFinal;
+    float pendingPitch = 1f;
 
     // "override" replaces the do-nothing version from Weapon.
     public override void AddProjectiles(int count) => projectilesPerShot += count;
@@ -82,6 +83,7 @@ public class AutoShooter : Weapon
         pendingStrike = strike;
         pendingArrows = arrows;
         pendingIsFinal = isFinal;
+        pendingPitch = LastChainPitch;
     }
 
     // The moment the arrow is released, announced by the animation itself.
@@ -95,7 +97,7 @@ public class AutoShooter : Weapon
         int arrows = pendingArrows;
         bool isFinal = pendingIsFinal;
 
-        GameAudio.Play(GameAudio.Sfx.Shoot);
+        GameAudio.Play(GameAudio.Sfx.Shoot, 1f, pendingPitch); // each strike of the combo has its own pitch
 
         Vector3 origin = transform.position + Vector3.up * fireHeight;
         // Aim at the target's center (not flat), so arrows also hit short enemies

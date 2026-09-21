@@ -85,13 +85,16 @@ public class GameAudio : MonoBehaviour
     }
 
     // The one method the rest of the game uses.
-    public static void Play(Sfx sfx, float volume = 1f)
+    // "pitch" lets the caller say something with the sound: 1 is the file as
+    // recorded, higher is lighter and quicker, lower is heavier. The weapons
+    // use it so the three strikes of a combo don't all sound the same.
+    public static void Play(Sfx sfx, float volume = 1f, float pitch = 1f)
     {
         if (instance != null)
-            instance.PlayInternal(sfx, volume);
+            instance.PlayInternal(sfx, volume, pitch);
     }
 
-    void PlayInternal(Sfx sfx, float volume)
+    void PlayInternal(Sfx sfx, float volume, float pitch)
     {
         if (muted)
             return;
@@ -121,8 +124,9 @@ public class GameAudio : MonoBehaviour
         AudioSource source = voices[nextVoice];
         nextVoice = (nextVoice + 1) % voices.Length;
 
-        // A little random pitch so repeated hits don't sound like a machine.
-        source.pitch = Random.Range(0.94f, 1.06f);
+        // A little random pitch so repeated hits don't sound like a machine,
+        // on top of whatever pitch the caller asked for.
+        source.pitch = pitch * Random.Range(0.94f, 1.06f);
         source.PlayOneShot(clip, volume * BaseVolume(sfx) * SoundSettings.Master);
     }
 

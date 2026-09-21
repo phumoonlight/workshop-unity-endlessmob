@@ -65,7 +65,8 @@ public class MeleeSlash : Weapon
         // real sword recording is quiet at first and only swells as the blade
         // comes round, so starting it early is what puts its loudest moment on
         // the hit.
-        GameAudio.Play(GameAudio.Sfx.Slash);
+        // Each strike of the combo has its own pitch (see Weapon.chainPitch).
+        GameAudio.Play(GameAudio.Sfx.Slash, 1f, LastChainPitch);
 
         // BeginImpact first: if the previous swing has not landed yet it lands
         // now, and it has to land with ITS values, not the ones below.
