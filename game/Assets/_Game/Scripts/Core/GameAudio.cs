@@ -38,6 +38,17 @@ public class GameAudio : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] float masterVolume = 0.8f;
 
+    // Base loudness of single sounds, on top of the master volume. The files
+    // are all normalised (as loud as they can be), so the ones you hear
+    // constantly are turned down here or they drown out everything else.
+    [Tooltip("Sword swing loudness. 1 = the file's full volume.")]
+    [Range(0f, 1f)]
+    [SerializeField] float slashVolume = 0.5f;
+
+    [Tooltip("Dagger throw loudness. Lower than the sword: Rapid Fire plays it three times as often.")]
+    [Range(0f, 1f)]
+    [SerializeField] float shootVolume = 0.4f;
+
     [Tooltip("How many sounds can overlap. Past this, the oldest one is cut off.")]
     [SerializeField] int voiceCount = 16;
 
@@ -124,7 +135,7 @@ public class GameAudio : MonoBehaviour
 
         // A little random pitch so repeated hits don't sound like a machine.
         source.pitch = Random.Range(0.94f, 1.06f);
-        source.PlayOneShot(clip, volume * masterVolume);
+        source.PlayOneShot(clip, volume * BaseVolume(sfx) * masterVolume);
     }
 
     // Pick which take to play. Rolling again when we land on the one we just
@@ -144,6 +155,17 @@ public class GameAudio : MonoBehaviour
 
     // Getting hurt fires every frame while an enemy touches you, so it needs a
     // much longer gap than a one-off sound like a coin.
+    // Sounds without their own setting play at the file's full volume.
+    float BaseVolume(Sfx sfx)
+    {
+        switch (sfx)
+        {
+            case Sfx.Slash: return slashVolume;
+            case Sfx.Shoot: return shootVolume;
+            default: return 1f;
+        }
+    }
+
     float MinGap(Sfx sfx) => sfx == Sfx.PlayerHurt ? 0.45f : repeatDelay;
 
     // ---- The recipes -------------------------------------------------------
