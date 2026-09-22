@@ -20,12 +20,13 @@ Unity topics covered so far, one per session, with the idea behind each. Add a l
 | Pitch as information | `GameAudio.Play`, `Weapon.chainPitch` | Random pitch only stops a sound feeling robotic; a *chosen* pitch tells the player something. Higher = lighter, lower = heavier, so the combo's strikes go 1 → 1.1 → 0.85. The same trick makes gem pickups climb in pitch when collected quickly (not done: `Gem` has no sound file yet). |
 | Directional light | `Game.unity` > Directional Light | The scene's one sun: only its rotation matters, never its position. Light travels along the object's blue Z arrow; Rotation X tips it (sun height), Rotation Y turns it (which side). A low sun spreads its light thin on flat ground (50 deg lands 77 %, 25 deg lands 42 %), so an evening look needs more Intensity to pay it back. Set to 25 deg, orange, intensity 1.8. Not done yet: ambient light, skybox, fog. |
 | Frame Debugger | Window > Analysis > Frame Debugger | A frame is one painting done stroke by stroke; each stroke is a **draw call**. Enable freezes one frame and the slider replays the strokes in order. Answers: what is expensive (long list), why something is missing (no stroke), why something is on top (later strokes cover earlier ones). The Profiler says a frame is slow; the Frame Debugger says which strokes. Opened and explained; the developer did not step through a frame yet. |
+| Ambient light | Lighting window > Environment > Environment Lighting | The sun lights one side of things; ambient is the colour of the **other** side, the shadow side. It fakes light bouncing off walls: a flat glow from everywhere, no shadows. Source = Skybox samples it from the sky picture; Source = Color gives one swatch. The developer switched to Color and picked green by hand. Not done yet: skybox, fog. |
 
 ## What to learn next
 Agreed on 2026-09-22. The developer asked for **simpler explanations**: an everyday picture first (a traffic light for enums), one idea at a time, short.
 
 Hands-on, no code to break — good while recent changes are still unplayed:
-- **Lighting, second half** (next up): ambient light (why shadow sides are grey-blue), skybox, fog. The sun is done.
+- **Lighting, third part** (next up): skybox and fog. Sun and ambient are done.
 - **Git branches / tags** to park the shelved castle mode instead of carrying it switched off.
 
 Needs code — after the playtest:
