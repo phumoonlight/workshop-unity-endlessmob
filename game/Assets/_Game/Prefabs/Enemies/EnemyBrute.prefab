@@ -196,6 +196,8 @@ MonoBehaviour:
   buildingAggroRange: 6
   structureDamage: 3
   contactRange: 1.8
+  attackWindUp: 0.5
+  attackRecover: 0.6
   structureContactRange: 1.4
   xpGemPrefab: {fileID: 2961038593872191271, guid: 859edd20af5b3874b9503ed68817c827, type: 3}
   coinPrefab: {fileID: 5363542575954755089, guid: c4e152d0d5a8ceb4e93f08b582fb2b55, type: 3}
@@ -374,8 +376,28 @@ PrefabInstance:
     - {fileID: 3853857303286242271, guid: ca32052da591292429d1375304e1cc62, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7757726413535840976, guid: ca32052da591292429d1375304e1cc62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1608433873276249292}
   m_SourcePrefab: {fileID: 100100000, guid: ca32052da591292429d1375304e1cc62, type: 3}
+--- !u!1 &6250577393244957939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7757726413535840976, guid: ca32052da591292429d1375304e1cc62, type: 3}
+  m_PrefabInstance: {fileID: 4401837728296855075}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1608433873276249292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250577393244957939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a64cbaa2b489064bb72b9b5398155ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySwingRelay
 --- !u!4 &6250577393244991763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7757726413536335664, guid: ca32052da591292429d1375304e1cc62, type: 3}

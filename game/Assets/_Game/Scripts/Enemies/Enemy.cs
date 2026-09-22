@@ -33,8 +33,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float contactRange = 1.2f;
 
     [Header("Melee attack")]
-    [Tooltip("Seconds from the start of a swing until the hit lands. Stepping away in this time dodges it.")]
-    [SerializeField] float attackWindUp = 0.4f;
+    [Tooltip("Safety net: if the swing clip's AttackImpact event never arrives, land the hit this many seconds in.")]
+    [SerializeField] float attackWindUp = 0.5f;
 
     [Tooltip("Seconds after the hit lands before the enemy moves or swings again.")]
     [SerializeField] float attackRecover = 0.6f;
@@ -95,7 +95,7 @@ public class Enemy : MonoBehaviour
     {
         Idle,   // nowhere to go (hero down, guard already home): stand still
         Chase,  // walk towards the target
-        Attack  // stand and swing: the hit lands after attackWindUp seconds
+        Attack  // stand and swing: the hit lands on the clip's AttackImpact event
     }
 
     State state = State.Idle;
@@ -253,8 +253,9 @@ public class Enemy : MonoBehaviour
             model.Attack();
     }
 
-    // One swing: stand still, face the hero, land the hit part-way through,
-    // then a short recovery. The timer is what moves this state along.
+    // One swing: stand still, face the hero, land the hit when the animation
+    // says so (SwingLanded), then a short recovery. The timer moves the state
+    // on, and lands the hit itself only if the animation's event never came.
     void UpdateAttack()
     {
         body.linearVelocity = Vector3.zero;
@@ -263,15 +264,24 @@ public class Enemy : MonoBehaviour
         attackTimer += Time.fixedDeltaTime;
 
         if (!attackLanded && attackTimer >= attackWindUp)
-        {
-            attackLanded = true;
-            // Stepping out of reach during the wind-up dodges the hit.
-            if (IsPlayerInRange(contactRange))
-                player.TakeDamage(playerDamage);
-        }
+            SwingLanded(); // safety net: no event arrived (no model, or a clip without one)
 
         if (attackTimer >= attackWindUp + attackRecover)
             state = State.Chase; // next FixedUpdate decides: swing again, or chase
+    }
+
+    // Called by EnemySwingRelay when the swing clip reaches its AttackImpact
+    // event: the frame where the arm is at the bottom of the swing. The clip
+    // decides the moment, not a stopwatch, so a faster or slower clip just works.
+    public void SwingLanded()
+    {
+        if (state != State.Attack || attackLanded)
+            return;
+        attackLanded = true;
+
+        // Stepping out of reach during the wind-up dodges the hit.
+        if (IsPlayerInRange(contactRange))
+            player.TakeDamage(playerDamage);
     }
 
     void Chase(Vector3 target)

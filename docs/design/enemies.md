@@ -5,4 +5,4 @@
 - Enemy health grows +8 % per minute (camps use the same multiplier).
 - Enemies that fall far behind are teleported back to the edge, so pressure never drops.
 - Spawned enemies hunt the player only; they ignore buildings.
-- **Melee hits are swings, not contact.** In reach (1.2 m) an enemy stops and swings; the hit lands 0.4 s later, so stepping out of reach dodges it. 0.6 s recovery, then it chases or swings again. One hit = 10 (a Brute's ordinary hit is 8, on top of its slam).
+- **Melee hits are swings, not contact.** In reach (1.2 m) an enemy stops and swings; the hit lands when the swing animation reaches its impact frame (about 0.43 s), so stepping out of reach dodges it. 0.6 s recovery, then it chases or swings again. One hit = 10 (a Brute's ordinary hit is 8, on top of its slam).
