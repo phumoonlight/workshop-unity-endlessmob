@@ -73,28 +73,7 @@ The castle-defense mode is switched off but its code and scene objects remain: t
 ## Playtest checklist
 Everything here was **compile-checked only** - nobody has seen it run. Tick a box when checked, and delete the block once all its boxes are ticked. If something is broken, `git log` has one commit per block, so it can be undone on its own.
 
-**Assassin rework and settings window** (before 2026-09-22)
-- [ ] The dagger flies point-first and is big enough to read.
-- [ ] Bouncing Blade hops correctly; the final-strike blade is not too strong under Rapid Fire.
-- [ ] Rapid Fire at 3x looks acceptable with the bow animation.
-- [ ] Gear icon, slider layout and drag feel; Esc closes settings *before* it pauses; the DEV button and panel in their new spot.
-
-**Enemy physics layer** (2026-09-22, commit `fba6f59`)
-- [ ] Both heroes' attacks, Whirlwind, Bouncing Blade and the final-strike blade still hit all four enemy kinds.
-- [ ] Enemies inside a camp circle still slow the capture.
-- [ ] The Console shows no "is not on the 'Enemy' layer" warning.
-
-**Pooled gems and coins** (2026-09-22, commit `0495100`)
-- [ ] A dropped gem sits and spins until you walk near (not already flying) and flies in at the normal speed - also late in a run.
-- [ ] Camp loot still scatters.
-- [ ] After TRY AGAIN no old gems are on the ground, and new ones still drop.
-
-**Enemy Role enum** (2026-09-22, commit `7b2ca29`) - behaviour should be unchanged
-- [ ] Spawned enemies still run straight at the hero, and stand still when the hero is down.
-- [ ] Camp guards stay at their camp, chase a hero who comes close, and walk home when the hero leaves.
-
-**Combo pitch** (2026-09-22, commit `50e2e39`)
-- [ ] Both heroes' three strikes sound like "one, two, THREE" (pitch 1 / 1.1 / 0.85 - `Chain Pitch` on the weapon in the Inspector). If the final strike sounds muddy or the second squeaky, move the numbers closer to 1.
+Nothing open right now.
 
 ## Known gaps and ideas
 - **Sound licences:** `Resources/Sfx/Slash/ABOUT.txt` guesses the slash sound is from Pixabay; the dagger throw (`Shoot.ogg`) has no source written down at all. Record both before sharing the game.
