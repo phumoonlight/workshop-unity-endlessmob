@@ -27,14 +27,15 @@ Unity topics covered so far, one per session, with the idea behind each. Add a l
 Agreed on 2026-09-22. The developer asked for **simpler explanations**: an everyday picture first (a traffic light for enums), one idea at a time, short.
 
 Hands-on, no code to break — good while recent changes are still unplayed:
-- **Git branches / tags** (next up) to park the shelved castle mode instead of carrying it switched off.
 
-Needs code — after the playtest:
+Hands-on lighting is all done. Next:
+- **Collision matrix** (next up, no code): Project Settings > Physics. Second half of physics layers: which layers bump into each other at all. Only matters for things with colliders; pickups and bushes have none.
+
+Needs code:
 - **Animator Override Controller**: same animator, different clips — puts the Assassin on the pack's twin-dagger animations.
 - **State machine, second half**: a state that changes over time (Idle → Chase → Attack), which is what enemy attack animations need. `Enemy.Role` was the first half.
-- **Collision matrix** (second half of physics layers): only worth it for things that have colliders — pickups and bushes have none.
 
-Skipped for now by the developer: how survivors games handle thousands of enemies (steering, spatial grids, DOTS), unit tests for `ItemBag` / `PlayerProfile`, and the game-design topic (level-up choices, balance spreadsheet).
+Skipped by the developer: **Git branches / tags** (they know git from web dev; only Unity and game dev are new). Also skipped for now: how survivors games handle thousands of enemies (steering, spatial grids, DOTS), unit tests for `ItemBag` / `PlayerProfile`, and the game-design topic (level-up choices, balance spreadsheet).
 
 ## Lessons from this project's bugs
 - **`Random` and most Unity APIs can't run in a field initializer.** It throws in the constructor and the rest of the object's setup is abandoned. Initialise in `Awake`.
