@@ -30,6 +30,9 @@ Unity topics covered so far, one per session, with the idea behind each. Add a l
 
 ## What to learn next
 Every topic agreed on 2026-09-22 is now done or skipped. Candidates for the next agreement (hands-on first):
+- **A real hit sound** (no code): drop `Hit.ogg` or a `Hit/` folder of takes into `Resources/Sfx/`, Stop → Play. Enemy swings and hero strikes both play `Sfx.Hit`; today it is silent. kenney.nl packs are CC0.
+- **Prefab variants**: `EnemyFast` / `EnemyArcher` / `EnemyBrute` are separate copies of `Enemy.prefab`; a variant inherits and overrides only what differs, so adding a component (like `EnemySwingRelay`) lands on all of them at once.
+- **ScriptableObjects as tuning data**: `ItemData` / `PlayerClassData` already are; enemy stats (health, speed, damage) could be one asset per enemy kind instead of fields on the prefab.
 
 Agreed on 2026-09-22. The developer asked for **simpler explanations**: an everyday picture first (a traffic light for enums), one idea at a time, short.
 
