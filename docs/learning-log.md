@@ -18,13 +18,14 @@ Unity topics covered so far, one per session, with the idea behind each. Add a l
 | Pooling things with state | `PickupPool`, `MagnetPickup.OnEnable` | A pool is just a stack of switched-off spares. The hard part is the **reset**: `Awake` runs once per object, `OnEnable` runs every time it is switched on, so whatever a use changed (`flySpeed` grew, `isFlying` was set) goes back in `OnEnable`. Decide who owns the spares: effects live across scenes, pickups die with their run. |
 | Enums instead of yes/no switches | `Enemy.Role` | Like a traffic light: one variable that is exactly one of a named list (`Attacker` / `Guard` / `Hunter`). Two `bool`s allow four combinations and some mean nothing; an enum makes the nonsense impossible to write. A `switch` on it picks the behaviour. This is the first half of a **state machine** — the second half (not done yet) is a state that *changes over time*: Idle → Chase → Attack. |
 | Pitch as information | `GameAudio.Play`, `Weapon.chainPitch` | Random pitch only stops a sound feeling robotic; a *chosen* pitch tells the player something. Higher = lighter, lower = heavier, so the combo's strikes go 1 → 1.1 → 0.85. The same trick makes gem pickups climb in pitch when collected quickly (not done: `Gem` has no sound file yet). |
+| Directional light | `Game.unity` > Directional Light | The scene's one sun: only its rotation matters, never its position. Light travels along the object's blue Z arrow; Rotation X tips it (sun height), Rotation Y turns it (which side). A low sun spreads its light thin on flat ground (50 deg lands 77 %, 25 deg lands 42 %), so an evening look needs more Intensity to pay it back. Set to 25 deg, orange, intensity 1.8. Not done yet: ambient light, skybox, fog. |
 
 ## What to learn next
 Agreed on 2026-09-22. The developer asked for **simpler explanations**: an everyday picture first (a traffic light for enums), one idea at a time, short.
 
 Hands-on, no code to break — good while recent changes are still unplayed:
-- **Lighting** (next up): light colour and angle, ambient light, skybox, fog. Done by hand in the editor.
-- **Frame Debugger tour**: see every draw call of one frame; explains why enemy renderers were the cost.
+- **Frame Debugger tour** (next up): see every draw call of one frame; explains why enemy renderers were the cost.
+- **Lighting, second half**: ambient light (why shadow sides are grey-blue), skybox, fog. The sun is done.
 - **Git branches / tags** to park the shelved castle mode instead of carrying it switched off.
 
 Needs code — after the playtest:
