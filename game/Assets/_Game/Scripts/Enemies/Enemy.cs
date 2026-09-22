@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -99,7 +100,7 @@ public class Enemy : MonoBehaviour
     }
 
     State state = State.Idle;
-    float attackTimer;   // seconds since this swing started
+    Coroutine swing;     // the running Swing() recipe, kept so it can be stopped early
     bool attackLanded;   // has this swing done its damage yet?
     EnemyModel model;    // plays the swing animation (null on a model-less enemy)
 
@@ -226,7 +227,11 @@ public class Enemy : MonoBehaviour
 
         // Step 1: which state are we in this moment?
         if (target == null || MovementLocked)
+        {
+            if (state == State.Attack)
+                CancelSwing(); // the recipe must not carry on for an enemy that stopped
             state = State.Idle;
+        }
         else if (state != State.Attack) // a swing that has started is always finished first
         {
             if (IsPlayerInRange(contactRange))
@@ -247,27 +252,40 @@ public class Enemy : MonoBehaviour
     void StartAttack()
     {
         state = State.Attack;
-        attackTimer = 0f;
         attackLanded = false;
         if (model != null)
             model.Attack();
+        swing = StartCoroutine(Swing());
     }
 
-    // One swing: stand still, face the hero, land the hit when the animation
-    // says so (SwingLanded), then a short recovery. The timer moves the state
-    // on, and lands the hit itself only if the animation's event never came.
+    // While a swing runs, every physics step still does the per-tick work:
+    // stand still and keep facing the hero. The timing lives in Swing().
     void UpdateAttack()
     {
         body.linearVelocity = Vector3.zero;
         if (player != null)
             FaceTowards(player.transform.position);
-        attackTimer += Time.fixedDeltaTime;
+    }
 
-        if (!attackLanded && attackTimer >= attackWindUp)
-            SwingLanded(); // safety net: no event arrived (no model, or a clip without one)
+    // One swing written as a recipe, top to bottom. "yield return" puts the
+    // recipe down; Unity picks it up again when the wait is over. The hit
+    // itself lands on the clip's AttackImpact event (SwingLanded); the first
+    // wait is only the safety net for a clip without one.
+    IEnumerator Swing()
+    {
+        yield return new WaitForSeconds(attackWindUp);
+        SwingLanded(); // does nothing if the event already landed it
 
-        if (attackTimer >= attackWindUp + attackRecover)
-            state = State.Chase; // next FixedUpdate decides: swing again, or chase
+        yield return new WaitForSeconds(attackRecover);
+        state = State.Chase; // next FixedUpdate decides: swing again, or chase
+        swing = null;
+    }
+
+    void CancelSwing()
+    {
+        if (swing != null)
+            StopCoroutine(swing);
+        swing = null;
     }
 
     // Called by EnemySwingRelay when the swing clip reaches its AttackImpact
