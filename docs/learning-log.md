@@ -22,7 +22,7 @@ Unity topics covered so far, one per session, with the idea behind each. Add a l
 ## What to learn next
 Agreed on 2026-09-22. The developer asked for **simpler explanations**: an everyday picture first (a traffic light for enums), one idea at a time, short.
 
-Hands-on, no code to break — good while the [playtest checklist](game-design.md#playtest-checklist) is still open:
+Hands-on, no code to break — good while recent changes are still unplayed:
 - **Lighting** (next up): light colour and angle, ambient light, skybox, fog. Done by hand in the editor.
 - **Frame Debugger tour**: see every draw call of one frame; explains why enemy renderers were the cost.
 - **Git branches / tags** to park the shelved castle mode instead of carrying it switched off.

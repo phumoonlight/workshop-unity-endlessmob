@@ -70,15 +70,9 @@ The shop (pre-start screen) checks for stash room **before** taking coins. Coins
 ## Shelved mode
 The castle-defense mode is switched off but its code and scene objects remain: the Castle with corner archers and upgrades, wave manager, castle health bar, chest spawner, wilderness scouts, fog of war, building (Barracks, Towers, Builder huts, outposts). See [architecture.md](architecture.md#shelved-systems) for what is disabled where.
 
-## Playtest checklist
-Everything here was **compile-checked only** - nobody has seen it run. Tick a box when checked, and delete the block once all its boxes are ticked. If something is broken, `git log` has one commit per block, so it can be undone on its own.
-
-Nothing open right now.
-
 ## Known gaps and ideas
 - **Sound licences:** `Resources/Sfx/Slash/ABOUT.txt` guesses the slash sound is from Pixabay; the dagger throw (`Shoot.ogg`) has no source written down at all. Record both before sharing the game.
 - The settings window exists only in the run; the main menu and pre-start screen have no way to change volume.
-- **Two survival clocks** show (top-centre and top-left) — decide which to keep.
 - **Icons are placeholders** drawn in code; items are coloured squares. A small sprite set (coin, heart, sword, berry) would replace them.
 - **Balance is untested:** spawn curve, health growth, Brute timing, class XP curve, prices, Relic/Armor strength, capture speed with enemies inside.
 - **Lighting:** one directional light and the default skybox; a warmer-light/sky pass was skipped.

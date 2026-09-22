@@ -3,15 +3,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// The survival clock at the top of the screen, and the result panel when the
-// run ends. (Kept its old name so the scene's reference to it still works; it
-// used to show wave numbers.)
+// The result panel when the run ends. (Kept its old name so the scene's
+// reference to it still works; it used to show wave numbers, then the big
+// survival clock -- RunHud's small top-left clock does that job now.)
 public class WaveHud : MonoBehaviour
 {
     [SerializeField] EnemySpawner spawner;
     [SerializeField] RunBank bank;
-
-    [SerializeField] TMP_Text infoText;
 
     [Header("Result panel")]
     [Tooltip("How dark the game behind the panel gets. Without this the text fights with the mob for attention.")]
@@ -26,12 +24,6 @@ public class WaveHud : MonoBehaviour
     [Tooltip("Seconds for the panel to fade in.")]
     [SerializeField] float fadeSeconds = 0.4f;
 
-    // What the label said last frame. Rebuilding the text every frame makes a
-    // new string 60 times a second for something that changes about once a
-    // second, and every one of those becomes garbage. Assigning to a TMP_Text
-    // also makes it re-lay-out the characters, so skipping it saves both.
-    string shown;
-
     // Built once, the moment the run ends. Nothing on it changes afterwards.
     CanvasGroup result;
 
@@ -45,22 +37,6 @@ public class WaveHud : MonoBehaviour
         // animation needs.
         if (result != null && result.alpha < 1f)
             result.alpha = Mathf.MoveTowards(result.alpha, 1f, Time.unscaledDeltaTime / Mathf.Max(0.01f, fadeSeconds));
-
-        string next = Compose();
-        if (next == shown)
-            return;
-
-        shown = next;
-        infoText.text = next;
-    }
-
-    string Compose()
-    {
-        // The panel reports the time; a second clock above it is just noise.
-        if (GameStats.IsGameOver)
-            return "";
-
-        return $"<size=150%>{FormatTime(Seconds())}</size>";
     }
 
     float Seconds() => spawner != null ? spawner.Elapsed : Time.timeSinceLevelLoad;
@@ -69,8 +45,9 @@ public class WaveHud : MonoBehaviour
 
     void BuildResult()
     {
-        // The top-most canvas the clock lives on: no extra scene wiring needed.
-        Transform canvasRoot = infoText.canvas.rootCanvas.transform;
+        // This object sits inside the HUD canvas; walk up to the top-most
+        // canvas so the panel covers the whole screen. No scene wiring needed.
+        Transform canvasRoot = GetComponentInParent<Canvas>().rootCanvas.transform;
 
         // A dark veil over the whole screen, then the panel on top of it.
         GameObject veil = UiFactory.Box("RunResult", canvasRoot, Vector2.zero, new Vector2(4000f, 4000f), veilColor, blocksClicks: true).gameObject;
