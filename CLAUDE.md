@@ -7,7 +7,7 @@ The developer is **new to game development**: explain simply, keep changes small
 ## Repository layout
 - `game/` — the Unity project (open this folder in Unity Hub). Has its own `.gitignore`.
 - `docs/` — human documentation, outside the project so Unity doesn't import it:
-  - `docs/game-design.md` — rules, controls, tuning numbers, known gaps
+  - `docs/design/` — one file per topic: loop, controls, enemies, camps, progression, items, shelved mode, known gaps (`README.md` is the index)
   - `docs/architecture.md` — how each system is coded, saving, HUD, performance, shelved code
   - `docs/building.md` — build and share the .exe
   - `docs/learning-log.md` — topics covered with the developer, and **what to learn next** (start a teaching session here)
@@ -27,7 +27,7 @@ Claude's working directory is the **repo root**: shell, Grep and file-tool paths
 - Workflow: edit scripts → `unity command recompile`, poll `recompile_status` → wire scenes/prefabs with an `eval_file` script → `console_status` (`console --level error` for stack traces) → review → commit.
 - **Check `editor_status` for play mode first.** Saving scenes, creating assets and editing prefabs fail during play; ask the developer to press Stop.
 - **Keep token use low:** no screenshots, no playtesting. Compile-check, then the developer playtests and sends screenshots. State plainly what wasn't seen on screen.
-- **Every compile-checked-only change ends with a short "what to look for when you playtest" list in the reply** (the checklist section in `docs/game-design.md` was retired on 2026-09-22). When several such changes are still unplayed, prefer hands-on or read-only topics over more code, and say so.
+- **Every compile-checked-only change ends with a short "what to look for when you playtest" list in the reply** (the playtest checklist in the design docs was retired on 2026-09-22). When several such changes are still unplayed, prefer hands-on or read-only topics over more code, and say so.
 - It is an optimisation? **Measure first** (F9 → `Logs/PerfReport.txt`) and say honestly when the gain is a guess.
 - Verify player compilation without a full build: `PlayerBuildInterface.CompilePlayerScripts` for `StandaloneWindows64`.
 

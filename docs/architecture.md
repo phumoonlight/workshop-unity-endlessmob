@@ -1,6 +1,6 @@
 # Architecture — how the systems are built
 
-Technical reference for the code in `game/Assets/_Game/Scripts/`. For what the game *is*, read [game-design.md](game-design.md).
+Technical reference for the code in `game/Assets/_Game/Scripts/`. For what the game *is*, read the [design docs](design/README.md).
 
 ## Folder map (inside `game/`)
 | Path | Holds |
