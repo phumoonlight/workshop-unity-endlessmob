@@ -29,7 +29,6 @@ Unity topics covered so far, one per session, with the idea behind each. Add a l
 ## What to learn next
 Every topic agreed on 2026-09-22 is now done or skipped. Candidates for the next agreement (hands-on first):
 - **Animation Events on the enemy swing**: let the clip say when the hit lands (as the player's weapons do) instead of the 0.4 s timer.
-- **Hand props**: replace the Assassin's `BowProp` with the pack's twin daggers (`Prefab/Prop_AttachToHand(OptUseAnim)`); no code.
 - **Coroutines**: another way to write "wait, then do", compared with the timer in `Enemy.UpdateAttack`.
 
 Agreed on 2026-09-22. The developer asked for **simpler explanations**: an everyday picture first (a traffic light for enums), one idea at a time, short.
