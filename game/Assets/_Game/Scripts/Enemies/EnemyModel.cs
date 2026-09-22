@@ -24,6 +24,14 @@ public class EnemyModel : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
     }
 
+    // Called by Enemy when a swing starts. The animator's "Attack" trigger
+    // plays one swing and then drops back to the walk/run blend by itself.
+    public void Attack()
+    {
+        if (animator != null)
+            animator.SetTrigger("Attack");
+    }
+
     void Update()
     {
         if (animator == null)

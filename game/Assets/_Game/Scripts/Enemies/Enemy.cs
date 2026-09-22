@@ -4,6 +4,7 @@ using UnityEngine.Serialization;
 // A basic enemy. What it does depends on its Role (see below): a Hunter goes
 // straight for the hero (every enemy the spawner makes), a Guard stays at its
 // camp, an Attacker marches on the castle (the shelved castle mode).
+// At any moment it is in one State: Idle, Chase or Attack (see State below).
 // Dies when health runs out.
 [RequireComponent(typeof(Rigidbody))]
 public class Enemy : MonoBehaviour
@@ -18,7 +19,7 @@ public class Enemy : MonoBehaviour
     [FormerlySerializedAs("ignoresPlayer")] // keeps the value saved under the old name
     [SerializeField] bool relentless;
 
-    [Tooltip("Damage per second to the player while touching them.")]
+    [Tooltip("Damage of one melee hit on the player.")]
     [SerializeField] float playerDamage = 10f;
 
     [Tooltip("Attack a district building instead of the castle when it's closer than this.")]
@@ -28,8 +29,15 @@ public class Enemy : MonoBehaviour
     [FormerlySerializedAs("castleDamage")] // keeps the value saved under the old name
     [SerializeField] float structureDamage = 5f;
 
-    [Tooltip("How close (in meters) the enemy must be to hurt the player.")]
+    [Tooltip("How close (in meters) the enemy must be to start a swing at the player.")]
     [SerializeField] float contactRange = 1.2f;
+
+    [Header("Melee attack")]
+    [Tooltip("Seconds from the start of a swing until the hit lands. Stepping away in this time dodges it.")]
+    [SerializeField] float attackWindUp = 0.4f;
+
+    [Tooltip("Seconds after the hit lands before the enemy moves or swings again.")]
+    [SerializeField] float attackRecover = 0.6f;
 
     [Tooltip("How close (in meters) to a wall counts as touching it.")]
     [FormerlySerializedAs("castleContactRange")]
@@ -77,6 +85,24 @@ public class Enemy : MonoBehaviour
     }
 
     Role role = Role.Attacker;
+
+    // What the enemy is doing right now. Role is set once and never changes;
+    // State changes all the time, like a traffic light cycling: Chase until the
+    // hero is in reach, Attack for one swing, then back to Chase. A variable
+    // that says "which step are we on" plus timers that move it to the next
+    // step is what people call a "state machine".
+    enum State
+    {
+        Idle,   // nowhere to go (hero down, guard already home): stand still
+        Chase,  // walk towards the target
+        Attack  // stand and swing: the hit lands after attackWindUp seconds
+    }
+
+    State state = State.Idle;
+    float attackTimer;   // seconds since this swing started
+    bool attackLanded;   // has this swing done its damage yet?
+    EnemyModel model;    // plays the swing animation (null on a model-less enemy)
+
     Vector3 guardHome;
     float guardAggroOverride = -1f;
     // Looking for a building to attack is spread out in time. The first scan is
@@ -132,6 +158,7 @@ public class Enemy : MonoBehaviour
 
         health = maxHealth;
         body = GetComponent<Rigidbody>();
+        model = GetComponent<EnemyModel>();
         allRenderers = GetComponentsInChildren<Renderer>();
         flashBlock = new MaterialPropertyBlock();
 
@@ -197,24 +224,67 @@ public class Enemy : MonoBehaviour
             default:          target = AttackerTarget(); break;
         }
 
+        // Step 1: which state are we in this moment?
         if (target == null || MovementLocked)
+            state = State.Idle;
+        else if (state != State.Attack) // a swing that has started is always finished first
         {
-            body.linearVelocity = Vector3.zero;
-            return;
+            if (IsPlayerInRange(contactRange))
+                StartAttack();
+            else
+                state = State.Chase;
         }
 
+        // Step 2: do what that state does.
+        switch (state)
+        {
+            case State.Idle:   body.linearVelocity = Vector3.zero; break;
+            case State.Attack: UpdateAttack(); break;
+            default:           Chase(target.Value); break;
+        }
+    }
+
+    void StartAttack()
+    {
+        state = State.Attack;
+        attackTimer = 0f;
+        attackLanded = false;
+        if (model != null)
+            model.Attack();
+    }
+
+    // One swing: stand still, face the hero, land the hit part-way through,
+    // then a short recovery. The timer is what moves this state along.
+    void UpdateAttack()
+    {
+        body.linearVelocity = Vector3.zero;
+        if (player != null)
+            FaceTowards(player.transform.position);
+        attackTimer += Time.fixedDeltaTime;
+
+        if (!attackLanded && attackTimer >= attackWindUp)
+        {
+            attackLanded = true;
+            // Stepping out of reach during the wind-up dodges the hit.
+            if (IsPlayerInRange(contactRange))
+                player.TakeDamage(playerDamage);
+        }
+
+        if (attackTimer >= attackWindUp + attackRecover)
+            state = State.Chase; // next FixedUpdate decides: swing again, or chase
+    }
+
+    void Chase(Vector3 target)
+    {
         // Archers stop once they're close enough to shoot.
         if (isRanged && aimPoint != null && FlatDistance(aimPoint.Value, transform.position) <= attackRange * 0.85f)
         {
             body.linearVelocity = Vector3.zero;
-            Vector3 look = aimPoint.Value - transform.position;
-            look.y = 0f;
-            if (look.sqrMagnitude > 0.001f)
-                body.MoveRotation(Quaternion.LookRotation(look));
+            FaceTowards(aimPoint.Value);
             return;
         }
 
-        Vector3 direction = target.Value - transform.position;
+        Vector3 direction = target - transform.position;
         direction.y = 0f;
         direction.Normalize();
 
@@ -223,6 +293,14 @@ public class Enemy : MonoBehaviour
         body.linearVelocity = direction * moveSpeed;
         if (direction != Vector3.zero)
             body.MoveRotation(Quaternion.LookRotation(direction));
+    }
+
+    void FaceTowards(Vector3 point)
+    {
+        Vector3 look = point - transform.position;
+        look.y = 0f;
+        if (look.sqrMagnitude > 0.001f)
+            body.MoveRotation(Quaternion.LookRotation(look));
     }
 
     void Update()
@@ -236,9 +314,7 @@ public class Enemy : MonoBehaviour
                 r.enabled = visible;
         }
 
-        // Hurt the player while touching them.
-        if (IsPlayerInRange(contactRange))
-            player.TakeDamage(playerDamage * Time.deltaTime);
+        // (Hurting the player happens in the Attack state, in FixedUpdate.)
 
         // Hurt the structure we're attacking while touching its walls.
         if (targetStructure != null && targetStructure.IsTargetable

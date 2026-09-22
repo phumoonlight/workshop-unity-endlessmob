@@ -24,14 +24,19 @@ Unity topics covered so far, one per session, with the idea behind each. Add a l
 | Skybox and fog | Lighting window > Environment | The **skybox** is wallpaper on the inside of the room: the far background, a material not a light. The top-down camera never sees it and ambient no longer samples it, so it stays default. **Fog** is a gradient from the object's colour to one fog colour, with distance from the camera as the position; Linear mode gives Start (clear) and End (all fog). The far side of the arena fogs first because the camera is tilted. Set by the developer: green (0,130,40), Linear, 20 to 60. Generate Lighting was pressed once by mistake: it **bakes** a photo of the light for things that never move, useless on a flat floor with a moving mob; the files it wrote were deleted. |
 | Collision matrix | Project Settings > Physics > Settings > Layer Collision Matrix | The guest list for physics: a triangle of checkboxes, one per pair of layers. Unticked pairs never touch and Unity skips checking them (like `pointer-events: none` on the web). Everything is ticked here and stays that way: enemies spread out **because** they bump into each other (`Enemy.FixedUpdate` sets velocity so physics pushes them apart), so Enemy vs Enemy must stay on, and the other layers hold nothing. Ask "does anything rely on that bump?" before unticking. |
 | Animator Override Controller | `Animation/PlayerBow.overrideController` | An animator controller is the **rules** (states, transitions, parameters); the clips are the **pictures**. `PlayerSword` and `PlayerBow` were two full copies of the same rules with different pictures, so a change to one had to be repeated in the other. An override controller is a thin sheet on top of a base controller that only says "where the base plays clip A, play clip B". The Assassin now runs on `PlayerSword` + six swapped clips; the copy is deleted. (The log's plan for this topic was stale: the twin-dagger clips were already in use.) |
+| State machine, second half | `Enemy.State`, `EnemyBody.controller` | `Role` is *what kind* (set once); `State` is *what it is doing now* (Idle / Chase / Attack) and changes all the time. Two steps every physics tick: pick the state, then do what it does. A **timer** is what moves a state along: Attack counts up, lands the hit at 0.4 s, hands back to Chase at 1.0 s. A rule worth copying: a started swing always finishes before anything else is decided. Contact damage per second became one hit per swing, which the player can now dodge. The animator got the same shape: an `Attack` state entered by a trigger, leaving by exit time. |
 
 ## What to learn next
+Every topic agreed on 2026-09-22 is now done or skipped. Candidates for the next agreement (hands-on first):
+- **Animation Events on the enemy swing**: let the clip say when the hit lands (as the player's weapons do) instead of the 0.4 s timer.
+- **Hand props**: replace the Assassin's `BowProp` with the pack's twin daggers (`Prefab/Prop_AttachToHand(OptUseAnim)`); no code.
+- **Coroutines**: another way to write "wait, then do", compared with the timer in `Enemy.UpdateAttack`.
+
 Agreed on 2026-09-22. The developer asked for **simpler explanations**: an everyday picture first (a traffic light for enums), one idea at a time, short.
 
 Hands-on, no code to break — good while recent changes are still unplayed:
 
 All hands-on topics are done. Needs code:
-- **State machine, second half** (next up): a state that changes over time (Idle → Chase → Attack), which is what enemy attack animations need. `Enemy.Role` was the first half.
 
 Skipped by the developer: **Git branches / tags** (they know git from web dev; only Unity and game dev are new). Also skipped for now: how survivors games handle thousands of enemies (steering, spatial grids, DOTS), unit tests for `ItemBag` / `PlayerProfile`, and the game-design topic (level-up choices, balance spreadsheet).
 
