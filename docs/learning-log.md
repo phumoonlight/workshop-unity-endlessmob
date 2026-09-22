@@ -22,17 +22,15 @@ Unity topics covered so far, one per session, with the idea behind each. Add a l
 | Frame Debugger | Window > Analysis > Frame Debugger | A frame is one painting done stroke by stroke; each stroke is a **draw call**. Enable freezes one frame and the slider replays the strokes in order. Answers: what is expensive (long list), why something is missing (no stroke), why something is on top (later strokes cover earlier ones). The Profiler says a frame is slow; the Frame Debugger says which strokes. Opened and explained; the developer did not step through a frame yet. |
 | Ambient light | Lighting window > Environment > Environment Lighting | The sun lights one side of things; ambient is the colour of the **other** side, the shadow side. It fakes light bouncing off walls: a flat glow from everywhere, no shadows. Source = Skybox samples it from the sky picture; Source = Color gives one swatch. The developer switched to Color and picked green by hand. Not done yet: skybox, fog. |
 | Skybox and fog | Lighting window > Environment | The **skybox** is wallpaper on the inside of the room: the far background, a material not a light. The top-down camera never sees it and ambient no longer samples it, so it stays default. **Fog** is a gradient from the object's colour to one fog colour, with distance from the camera as the position; Linear mode gives Start (clear) and End (all fog). The far side of the arena fogs first because the camera is tilted. Set by the developer: green (0,130,40), Linear, 20 to 60. Generate Lighting was pressed once by mistake: it **bakes** a photo of the light for things that never move, useless on a flat floor with a moving mob; the files it wrote were deleted. |
+| Collision matrix | Project Settings > Physics > Settings > Layer Collision Matrix | The guest list for physics: a triangle of checkboxes, one per pair of layers. Unticked pairs never touch and Unity skips checking them (like `pointer-events: none` on the web). Everything is ticked here and stays that way: enemies spread out **because** they bump into each other (`Enemy.FixedUpdate` sets velocity so physics pushes them apart), so Enemy vs Enemy must stay on, and the other layers hold nothing. Ask "does anything rely on that bump?" before unticking. |
 
 ## What to learn next
 Agreed on 2026-09-22. The developer asked for **simpler explanations**: an everyday picture first (a traffic light for enums), one idea at a time, short.
 
 Hands-on, no code to break — good while recent changes are still unplayed:
 
-Hands-on lighting is all done. Next:
-- **Collision matrix** (next up, no code): Project Settings > Physics. Second half of physics layers: which layers bump into each other at all. Only matters for things with colliders; pickups and bushes have none.
-
-Needs code:
-- **Animator Override Controller**: same animator, different clips — puts the Assassin on the pack's twin-dagger animations.
+All hands-on topics are done. Needs code:
+- **Animator Override Controller** (next up): same animator, different clips — puts the Assassin on the pack's twin-dagger animations.
 - **State machine, second half**: a state that changes over time (Idle → Chase → Attack), which is what enemy attack animations need. `Enemy.Role` was the first half.
 
 Skipped by the developer: **Git branches / tags** (they know git from web dev; only Unity and game dev are new). Also skipped for now: how survivors games handle thousands of enemies (steering, spatial grids, DOTS), unit tests for `ItemBag` / `PlayerProfile`, and the game-design topic (level-up choices, balance spreadsheet).
