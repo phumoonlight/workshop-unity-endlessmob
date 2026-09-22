@@ -34,10 +34,6 @@ Every topic agreed on 2026-09-22 is now done or skipped. Candidates for the next
 
 Agreed on 2026-09-22. The developer asked for **simpler explanations**: an everyday picture first (a traffic light for enums), one idea at a time, short.
 
-Hands-on, no code to break — good while recent changes are still unplayed:
-
-All hands-on topics are done. Needs code:
-
 Skipped by the developer: **Git branches / tags** (they know git from web dev; only Unity and game dev are new). Also skipped for now: how survivors games handle thousands of enemies (steering, spatial grids, DOTS), unit tests for `ItemBag` / `PlayerProfile`, and the game-design topic (level-up choices, balance spreadsheet).
 
 ## Lessons from this project's bugs
