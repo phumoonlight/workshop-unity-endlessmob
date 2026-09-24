@@ -63,6 +63,10 @@ bpy.ops.object.mode_set(mode='EDIT'); bpy.ops.mesh.select_all(action='SELECT')
 bpy.ops.mesh.remove_doubles(threshold=0.0005)  # bone heat fails on duplicate vertices
 bpy.ops.object.mode_set(mode='OBJECT')
 print("CLEANED VERTS", len(body.data.vertices))
+try:
+    bpy.ops.object.shade_smooth_by_angle(angle=math.radians(60))  # smooth, but keep real creases sharp
+except Exception:
+    bpy.ops.object.shade_smooth()
 
 # ---- 3. armature ---------------------------------------------------------------
 arm_data = bpy.data.armatures.new("ArisRig"); arm = bpy.data.objects.new("ArisRig", arm_data)
@@ -96,9 +100,22 @@ def seg_dist(p, a, b):
     ab = b - a; t = 0.0 if ab.length_squared == 0 else max(0.0, min(1.0, (p - a).dot(ab) / ab.length_squared))
     return (p - (a + ab * t)).length
 segs = [(b.name, b.head_local.copy(), b.tail_local.copy()) for b in arm_data.bones]
+# Which bones may a part follow? Hair must never grab a hand or a leg just because a strand hangs near it.
+def is_hair(n): return "hair" in n.lower()
+def is_skirt(n): return "skirt" in n.lower() or "ribbon" in n.lower()
+body_bones  = [sg for sg in segs if not is_hair(sg[0])]                                   # humanoid + skirt
+hair_bones  = [sg for sg in segs if is_hair(sg[0]) or sg[0] in ("Head", "Neck", "Chest", "Spine", "Hips")]
+head_only   = [sg for sg in segs if sg[0] == "Head"]
+allowed_by_material = {"Aris_Body": body_bones, "Aris_Hair": hair_bones, "Aris_Face": head_only, "Aris_EyeMouth": head_only}
+vert_mat = {}
+for poly in body.data.polygons:
+    mname = body.data.materials[poly.material_index].name
+    for vi in poly.vertices: vert_mat[vi] = mname
 fixed = 0
 for v in body.data.vertices:
-    best = sorted(segs, key=lambda sgm: seg_dist(v.co, sgm[1], sgm[2]))[:2]
+    cands = allowed_by_material.get(vert_mat.get(v.index, "Aris_Body"), segs)
+    best = sorted(cands, key=lambda sgm: seg_dist(v.co, sgm[1], sgm[2]))[:2]
+    if len(best) == 1: best = [best[0], best[0]]
     d0 = seg_dist(v.co, best[0][1], best[0][2]); d1 = seg_dist(v.co, best[1][1], best[1][2])
     w0 = 1.0 if (d1 == 0 or d1 > 1.6 * d0) else d1 / (d0 + d1)  # clearly closer bone takes all; near-ties blend
     body.vertex_groups[best[0][0]].add([v.index], w0, 'REPLACE')
