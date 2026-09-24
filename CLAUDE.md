@@ -17,7 +17,7 @@ The developer is **new to game development**: explain simply, keep changes small
 ## Where things are (paths relative to `game/`)
 - `Assets/_Game/Scripts/` — all code: `Core`, `Player`, `Weapons`, `Skills`, `Enemies`, `Progression`, `City`, `Inventory`, `UI`, `Camera`
 - `Assets/_Game/Prefabs/`, `Data/` (ScriptableObjects), `Resources/` (`Sfx/`, `Vfx/`, `Items/` — loaded by name), `Animation/`, `Settings/`, `Scenes/` (`MainMenu` 0, `PreStart` 1, `Game` 2)
-- `Assets/Haons SD series Pack/` — third-party art. **Read from it; never edit it.**
+- `Assets/ThirdParty/` — things we did not make: `Haons SD series Pack/` (asset-store art, **read from it; never edit it**) and `TestBAChar/` (a ripped study model: `.glb` files read via glTFast, plus a Blender-converted `.fbx`).
 - `Packages/com.unity.springbone/` — embedded package, committed.
 
 Claude's working directory is the **repo root**: shell, Grep and file-tool paths need the `game/` prefix. Paths passed to Unity APIs inside editor scripts stay project-relative (`Assets/…`).
