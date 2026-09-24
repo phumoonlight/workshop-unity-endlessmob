@@ -4,7 +4,9 @@
 # Weights are nearest-bone (Blender's bone-heat solver fails on this mesh); good enough for a top-down camera.
 
 import bpy, math, mathutils
-D = r"C:\my-contents\git-repos\workshop-unity-endlessmob\game\Assets\ThirdParty\TestBAChar\Assets\_MX\Characters\Aris_Original\Model\\"
+# The raw rip lives outside the Unity project (models/); only what Unity uses is under game/.
+D = r"C:\my-contents\git-repos\workshop-unity-endlessmob\models\TestBAChar\Assets\_MX\Characters\Aris_Original\Model\\"
+TEX = r"C:\my-contents\git-repos\workshop-unity-endlessmob\game\Assets\ThirdParty\TestBAChar\Textures\Aris_Original_"
 OUT = r"C:\my-contents\git-repos\workshop-unity-endlessmob\game\Assets\ThirdParty\TestBAChar\Aris_rigged.fbx"
 
 def fix(o):  # same stand-up + life-size fix as before
@@ -51,7 +53,7 @@ part_tex = {"SubMesh_0":"Body","SubMesh_1":"Face","SubMesh_2":"EyeMouth","SubMes
 mats = {}
 for t in set(part_tex.values()):
     m = bpy.data.materials.new("Aris_" + t); m.use_nodes = True
-    img = m.node_tree.nodes.new("ShaderNodeTexImage"); img.image = bpy.data.images.load(D + r"Texture\Aris_Original_" + t + ".png")
+    img = m.node_tree.nodes.new("ShaderNodeTexImage"); img.image = bpy.data.images.load(TEX + t + ".png")
     m.node_tree.links.new(img.outputs["Color"], m.node_tree.nodes["Principled BSDF"].inputs["Base Color"])
     mats[t] = m
 for o in meshes:
