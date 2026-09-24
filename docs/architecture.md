@@ -16,7 +16,7 @@ Technical reference for the code in `game/Assets/_Game/Scripts/`. For what the g
 | `Assets/Haons SD series Pack/` | Third-party characters and animations (Asset Store, Unity-chan License). Read only. |
 | `Packages/com.unity.springbone/` | Embedded package for hair/cloth physics |
 
-Key packages: Unity 6000.6.2f1, URP 17.7, Input System 1.20, Toon Shader 0.15 (preview), AI Navigation 2.0.
+Key packages: Unity 6000.6.2f1, URP 17.7, Input System 1.20, Toon Shader 0.15 (preview), AI Navigation 2.0, glTFast 6.20 (imports `.glb`/`.gltf` models — Unity cannot read them on its own; used for the `Assets/_Game/TestBAChar` study model).
 
 Data assets are created from **Create > Endless Mob > Building / Item / Player Class**.
 
