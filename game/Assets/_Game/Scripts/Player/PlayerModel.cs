@@ -14,6 +14,9 @@ public class PlayerModel : MonoBehaviour
     [Tooltip("The character shown for the Assassin (was the Archer).")]
     [SerializeField] GameObject bowModel;
 
+    [Tooltip("The character shown for Aris: the TestBAChar study model on Mixamo clips. Optional.")]
+    [SerializeField] GameObject arisModel;
+
     [Tooltip("How quickly the animation eases between standing, walking and running.")]
     [SerializeField] float blendSmoothing = 0.12f;
 
@@ -43,6 +46,8 @@ public class PlayerModel : MonoBehaviour
     {
         swordModel.SetActive(false);
         bowModel.SetActive(false);
+        if (arisModel != null)
+            arisModel.SetActive(false);
         active = null;
         swingLeft = 0f;
         swingWeight = 0f;
@@ -60,12 +65,20 @@ public class PlayerModel : MonoBehaviour
         swingLeft = swingTime;
     }
 
-    // Called by PlayerClassSelector once a hero is picked.
-    public void Show(bool isSword)
+    // Called by PlayerClassSelector once a hero is picked. The skin is read
+    // from the class asset, so a new hero needs no code here: one more model
+    // slot and one more line in this switch.
+    public void Show(HeroSkin skin)
     {
         HideAll();
 
-        GameObject model = isSword ? swordModel : bowModel;
+        GameObject model;
+        switch (skin)
+        {
+            case HeroSkin.Aris: model = arisModel != null ? arisModel : swordModel; break;
+            case HeroSkin.Bow:  model = bowModel; break;
+            default:            model = swordModel; break;
+        }
         model.SetActive(true);
         active = model.GetComponent<Animator>();
     }

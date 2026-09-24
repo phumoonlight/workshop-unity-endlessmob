@@ -89,8 +89,11 @@ public class PlayerClassSelector : MonoBehaviour
         if (!panel.activeSelf || Keyboard.current == null)
             return;
 
-        if (Keyboard.current.digit1Key.wasPressedThisFrame || Keyboard.current.numpad1Key.wasPressedThisFrame) Choose(0);
-        else if (Keyboard.current.digit2Key.wasPressedThisFrame || Keyboard.current.numpad2Key.wasPressedThisFrame) Choose(1);
+        // Keys 1, 2, 3... pick a hero, same as on the PreStart screen.
+        Keyboard keyboard = Keyboard.current;
+        for (int i = 0; i < classes.Length && i < 9; i++)
+            if (keyboard[Key.Digit1 + i].wasPressedThisFrame || keyboard[Key.Numpad1 + i].wasPressedThisFrame)
+                Choose(i);
     }
 
     void Choose(int index)
@@ -109,7 +112,7 @@ public class PlayerClassSelector : MonoBehaviour
         SetProp(swordProp, isSword);
         SetProp(bowProp, !isSword);
         if (model != null)
-            model.Show(isSword);
+            model.Show(SelectedClass.skin); // what you see; the weapon above is how you fight
 
         health.SetBaseMaxHealth(SelectedClass.maxHealth);
         movement.AddMoveSpeedPercent(SelectedClass.moveSpeedBonusPercent);

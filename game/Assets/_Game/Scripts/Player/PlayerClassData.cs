@@ -6,6 +6,16 @@ public enum WeaponKind
     Bow,
 }
 
+// Which character model is shown for a class. The weapon says how the class
+// fights; the skin only says what you see. Two classes can share a weapon
+// and still look different.
+public enum HeroSkin
+{
+    Sword, // the Haons greatsword hero (ModelSword)
+    Bow,   // the Haons twin-dagger hero (ModelBow)
+    Aris,  // the study model from TestBAChar, on Mixamo clips (ModelAris)
+}
+
 // One playable hero class. Create more with:
 // right-click in the Project window > Create > Endless Mob > Player Class
 [CreateAssetMenu(fileName = "PlayerClass", menuName = "Endless Mob/Player Class")]
@@ -20,6 +30,9 @@ public class PlayerClassData : ScriptableObject
     public string description = "What makes this class special.";
 
     public WeaponKind weapon;
+
+    [Tooltip("Which character model to show. Independent of the weapon.")]
+    public HeroSkin skin;
 
     public float maxHealth = 100f;
 

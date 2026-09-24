@@ -1971,6 +1971,7 @@ MonoBehaviour:
   classes:
   - {fileID: 11400000, guid: 15b2f4478a344c54b8caadf17df006fc, type: 2}
   - {fileID: 11400000, guid: d5ff20213ee957341ba62d89ce7adb15, type: 2}
+  - {fileID: 11400000, guid: 61be20173fa9c714b936a9b8d3496284, type: 2}
   startButton: {fileID: 111565637}
   backButton: {fileID: 1237559379}
   shop: {fileID: 1823915285}

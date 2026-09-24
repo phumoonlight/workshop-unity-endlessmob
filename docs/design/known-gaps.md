@@ -4,6 +4,7 @@
 - The settings window exists only in the run; the main menu and pre-start screen have no way to change volume.
 - **Icons are placeholders** drawn in code; items are coloured squares. A small sprite set (coin, heart, sword, berry) would replace them.
 - **Lighting:** one directional light and the default skybox; a warmer-light/sky pass was skipped.
+- **Aris (third hero):** skin weights are nearest-bone (Blender's solver failed on the mesh), so elbows and knees bend crudely and the hair and skirt move stiffly with the head and hips. Mixamo's sword clips were made for adult proportions. Attack-impact events sit at 25 / 25 / 35 % of the clips, untuned. The railgun's grip offset in the hand is a guess.
 - **Audio:** only sword swings and the Assassin's dagger throw (`Shoot`) exist. `Hit` (impacts) is the most-missed sound, then `Gem`, then `EnemyDie` / `PlayerHurt` / `LevelUp` / `Coin`. Real audio files, not synthesized ones — the code needs nothing: drop `Hit.ogg` (or a `Hit/` folder of takes) into `Resources/Sfx/`, then Stop → Play. kenney.nl audio packs are CC0. Once `Gem` has a file: make quick pickups climb in pitch (a few lines in `ExperienceGem`, using `GameAudio.Play`'s pitch). No music yet.
 - Enemies only walk (no attack or death animations); Q/R skills reuse the normal swing; the Swordsman has no R skill.
 - Particles don't cover skills, the Brute's slam, or daggers in flight.
