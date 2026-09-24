@@ -1,0 +1,67 @@
+{
+	"m_AssetBundleName": "1edeee3fa9384e9d2e34fefacfbbc86a_assets_all.bundle",
+	"m_Container": {
+		"Assets/_MX/Characters/Aris_Original/Model/Materials/Aris_Original_Body.mat": {
+			"m_Asset": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": 3145894677643818707 },
+			"m_PreloadIndex": 12,
+			"m_PreloadSize": 4
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Materials/Aris_Original_EyeMouth.mat": {
+			"m_Asset": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": -7451208817658870912 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 4
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Materials/Aris_Original_Eyebrow.mat": {
+			"m_Asset": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": 9017171817058172111 },
+			"m_PreloadIndex": 22,
+			"m_PreloadSize": 3
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Materials/Aris_Original_Face.mat": {
+			"m_Asset": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": 3198563100271844981 },
+			"m_PreloadIndex": 4,
+			"m_PreloadSize": 4
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Materials/Aris_Original_Hair.mat": {
+			"m_Asset": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": 3906558483203360539 },
+			"m_PreloadIndex": 25,
+			"m_PreloadSize": 5
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Materials/Aris_Original_Halo.mat": {
+			"m_Asset": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": -139300939588277373 },
+			"m_PreloadIndex": 19,
+			"m_PreloadSize": 3
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Materials/Aris_Original_Weapon.mat": {
+			"m_Asset": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": -5738109013041929843 },
+			"m_PreloadIndex": 8,
+			"m_PreloadSize": 4
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Materials/Aris_Original_Weapon_Glow.mat": {
+			"m_Asset": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": 6814935394657576983 },
+			"m_PreloadIndex": 16,
+			"m_PreloadSize": 3
+		}
+	},
+	"m_CorrespondingSourceObject": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": 0 },
+	"m_Dependencies": [
+		"cab-198bd317b4f52be1cfc3bf7f07cc9808",
+		"cab-4172df70c3345fcf201ef46ccd13aefd",
+		"cab-7bea607b222aeb78e6f41a023e240eea",
+		"cab-97c2225a5b38bc8e9de5114c79536679"
+	],
+	"m_ExplicitDataLayout": 1,
+	"m_HideFlags": 0,
+	"m_IsStreamedSceneAssetBundle": false,
+	"m_MainAsset": {
+		"m_Asset": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": 0 },
+		"m_PreloadIndex": 0,
+		"m_PreloadSize": 0
+	},
+	"m_Name": "1edeee3fa9384e9d2e34fefacfbbc86a_assets_all.bundle",
+	"m_PathFlags": 0,
+	"m_PrefabAsset": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": 0 },
+	"m_PrefabInstance": { "m_Collection": "cab-4e5de76303005a7d7d8c8373f64104aa", "m_PathID": 0 },
+	"m_PreloadTable": [],
+	"m_RuntimeCompatibility": 1,
+	"m_SceneHashes": {}
+}

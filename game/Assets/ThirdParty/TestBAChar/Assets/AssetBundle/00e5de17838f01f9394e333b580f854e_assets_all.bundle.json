@@ -1,0 +1,147 @@
+{
+	"m_AssetBundleName": "00e5de17838f01f9394e333b580f854e_assets_all.bundle",
+	"m_Container": {
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Cafe_Idle.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -7039584160169184178 },
+			"m_PreloadIndex": 18,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Cafe_Reaction.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -2642143487442465941 },
+			"m_PreloadIndex": 17,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Cafe_Walk.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 6332627312488577361 },
+			"m_PreloadIndex": 3,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Exs.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 1739418526659933264 },
+			"m_PreloadIndex": 20,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Exs_Cam.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -6289120194343503171 },
+			"m_PreloadIndex": 13,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Exs_Cutin.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -3671693106130155671 },
+			"m_PreloadIndex": 1,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Formation_Idle.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 2782909913331972461 },
+			"m_PreloadIndex": 12,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Formation_Pickup.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -8050319534740248779 },
+			"m_PreloadIndex": 2,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Move_End_Normal.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 7520601868211855188 },
+			"m_PreloadIndex": 14,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Move_Ing.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -7313978046594208194 },
+			"m_PreloadIndex": 15,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Normal_Attack_Delay.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -2365376928490404468 },
+			"m_PreloadIndex": 6,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Normal_Attack_End.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 4610143563303392880 },
+			"m_PreloadIndex": 9,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Normal_Attack_Ing.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 4499752106222647039 },
+			"m_PreloadIndex": 19,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Normal_Attack_Start.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -8278742447191652201 },
+			"m_PreloadIndex": 4,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Normal_Callsign.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -5420382212332545846 },
+			"m_PreloadIndex": 5,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Normal_Idle.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -4618634913854859951 },
+			"m_PreloadIndex": 8,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Normal_Reload.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 5393014802927907269 },
+			"m_PreloadIndex": 10,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Public01.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -7780281612178548060 },
+			"m_PreloadIndex": 24,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Victory_End.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -3312124813869901295 },
+			"m_PreloadIndex": 21,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Victory_Start.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -4420830765535238103 },
+			"m_PreloadIndex": 22,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Vital_Death.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -8449891891547810002 },
+			"m_PreloadIndex": 23,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Vital_Dying_Ing.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 230755927024804715 },
+			"m_PreloadIndex": 7,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Vital_Panic.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 2175714009494438159 },
+			"m_PreloadIndex": 11,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Animation/Aris_Original_Vital_Retreat.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 6062511297636675193 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/RootMotion/Aris_Original_Exs_Root.anim": {
+			"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": -322886140097786304 },
+			"m_PreloadIndex": 16,
+			"m_PreloadSize": 1
+		}
+	},
+	"m_CorrespondingSourceObject": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 0 },
+	"m_Dependencies": [],
+	"m_ExplicitDataLayout": 1,
+	"m_HideFlags": 0,
+	"m_IsStreamedSceneAssetBundle": false,
+	"m_MainAsset": {
+		"m_Asset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 0 },
+		"m_PreloadIndex": 0,
+		"m_PreloadSize": 0
+	},
+	"m_Name": "00e5de17838f01f9394e333b580f854e_assets_all.bundle",
+	"m_PathFlags": 0,
+	"m_PrefabAsset": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 0 },
+	"m_PrefabInstance": { "m_Collection": "cab-964a36bdd4d0ae5e433d487dafd4b527", "m_PathID": 0 },
+	"m_PreloadTable": [],
+	"m_RuntimeCompatibility": 1,
+	"m_SceneHashes": {}
+}

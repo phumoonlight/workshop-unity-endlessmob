@@ -1,0 +1,94 @@
+{
+	"m_AssetBundleName": "53856f16f49be628861b9d7c65e7f3dd_assets_all.bundle",
+	"m_Container": {
+		"Assets/_MX/Characters/Aris_Original/Model/Aris_Original_Halo.FBX": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 5074868449657538471 },
+			"m_PreloadIndex": 372,
+			"m_PreloadSize": 6
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Aris_Original_Halo.FBX": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": -3127379308498771588 },
+			"m_PreloadIndex": 372,
+			"m_PreloadSize": 6
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Aris_Original_Mesh.FBX": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": -4674733651025807761 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 371
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Aris_Original_Mesh.FBX": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 4325987947348516838 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 371
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Aris_Original_Mesh.FBX": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 6534447809610770007 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 371
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Aris_Original_Mesh.FBX": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 4612910396624143739 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 371
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Aris_Original_Mesh.FBX": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": -657981605554409815 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 371
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Aris_Original_Mesh.FBX": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 6987486546572538635 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 371
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Aris_Original_Mesh.FBX": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 4421658412864684199 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 371
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Aris_Original_Mesh.FBX": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": -1725482209443773133 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 371
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/Aris_Original_Mesh.FBX": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 4774972946315992506 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 371
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/OL_Aris_Original_Body.mesh": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": -8473942523165711311 },
+			"m_PreloadIndex": 371,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/OL_Aris_Original_Weapon.mesh": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 1107650028354627256 },
+			"m_PreloadIndex": 378,
+			"m_PreloadSize": 1
+		},
+		"Assets/_MX/Characters/Aris_Original/Model/OL_FX_Aris_Original_Weapon.mesh": {
+			"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 5341349505884164959 },
+			"m_PreloadIndex": 379,
+			"m_PreloadSize": 1
+		}
+	},
+	"m_CorrespondingSourceObject": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 0 },
+	"m_Dependencies": [
+		"cab-4e5de76303005a7d7d8c8373f64104aa"
+	],
+	"m_ExplicitDataLayout": 1,
+	"m_HideFlags": 0,
+	"m_IsStreamedSceneAssetBundle": false,
+	"m_MainAsset": {
+		"m_Asset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 0 },
+		"m_PreloadIndex": 0,
+		"m_PreloadSize": 0
+	},
+	"m_Name": "53856f16f49be628861b9d7c65e7f3dd_assets_all.bundle",
+	"m_PathFlags": 0,
+	"m_PrefabAsset": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 0 },
+	"m_PrefabInstance": { "m_Collection": "cab-421c89671b7803c7741a3e23a31e52c9", "m_PathID": 0 },
+	"m_PreloadTable": [],
+	"m_RuntimeCompatibility": 1,
+	"m_SceneHashes": {}
+}

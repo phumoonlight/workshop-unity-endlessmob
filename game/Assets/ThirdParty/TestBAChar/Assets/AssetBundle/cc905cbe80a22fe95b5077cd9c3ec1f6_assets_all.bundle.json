@@ -1,0 +1,129 @@
+{
+	"m_AssetBundleName": "cc905cbe80a22fe95b5077cd9c3ec1f6_assets_all.bundle",
+	"m_Container": {
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Motion_Cam_Bg1.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": -3609914026099184676 },
+			"m_PreloadIndex": 396,
+			"m_PreloadSize": 39
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Motion_Cam_Bg2.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": -4769624487540332574 },
+			"m_PreloadIndex": 49,
+			"m_PreloadSize": 13
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Motion_Cam_Eye.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 3479936768838539369 },
+			"m_PreloadIndex": 0,
+			"m_PreloadSize": 49
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Motion_Cam_Flare.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 9180018369335485758 },
+			"m_PreloadIndex": 370,
+			"m_PreloadSize": 26
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Motion_Cam_Hud.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 7541129124362653197 },
+			"m_PreloadIndex": 551,
+			"m_PreloadSize": 93
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Motion_Cam_Spark1.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 7303126597450113375 },
+			"m_PreloadIndex": 507,
+			"m_PreloadSize": 44
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Motion_Cam_Spark2.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 7302916636134269533 },
+			"m_PreloadIndex": 103,
+			"m_PreloadSize": 88
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Motion_Cam_Spark3.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 4880246925008619072 },
+			"m_PreloadIndex": 220,
+			"m_PreloadSize": 26
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Motion_Charge.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 5595689292551635531 },
+			"m_PreloadIndex": 665,
+			"m_PreloadSize": 51
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Motion_Hit_Start.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": -6242051662457292286 },
+			"m_PreloadIndex": 318,
+			"m_PreloadSize": 52
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Motion_Shot.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": -5925025730147274072 },
+			"m_PreloadIndex": 467,
+			"m_PreloadSize": 40
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Aris_Original_Ex01_Projectile.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 1759785989136767375 },
+			"m_PreloadIndex": 246,
+			"m_PreloadSize": 72
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Public_Aris_Original_Gauge01.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": -2757252361542433425 },
+			"m_PreloadIndex": 435,
+			"m_PreloadSize": 16
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Public_Aris_Original_Gauge02.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": -1974612439005597079 },
+			"m_PreloadIndex": 62,
+			"m_PreloadSize": 41
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Public_Aris_Original_Gauge03.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 4240575405989950205 },
+			"m_PreloadIndex": 451,
+			"m_PreloadSize": 16
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Public_Aris_Original_Gauge04.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 625868073386453106 },
+			"m_PreloadIndex": 766,
+			"m_PreloadSize": 16
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Public_Aris_Original_Pulsegun_Level1.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": -4863085248291108269 },
+			"m_PreloadIndex": 644,
+			"m_PreloadSize": 21
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Public_Aris_Original_Pulsegun_Level2.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": -6429423842265446652 },
+			"m_PreloadIndex": 191,
+			"m_PreloadSize": 29
+		},
+		"Assets/_MX/Characters/Aris_Original/Effects/Prefab/FX_Public_Motion_Aris_Mesh_1.prefab": {
+			"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": -2197599292534529179 },
+			"m_PreloadIndex": 716,
+			"m_PreloadSize": 50
+		}
+	},
+	"m_CorrespondingSourceObject": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 0 },
+	"m_Dependencies": [
+		"cab-151ded9b2abc7d8515260436a661006f",
+		"cab-2cf59b151f082883a3c80065a5acd240",
+		"cab-410701c6055481e626d9bb577d8249c2",
+		"cab-4c44c8767edf55516cd811d63c3d718d",
+		"cab-7a77112a135c886ca7970b6968d2e86f",
+		"cab-7bea607b222aeb78e6f41a023e240eea",
+		"cab-94b998496c12b17584a5ab977b07484e",
+		"cab-98e55d3f03d8911d16c8f41c48f1ba86",
+		"cab-b58ac03fa1e99baa267fe4f115d8dcf5",
+		"cab-bc1e8637f6a115f23ef2f7e88ce4550e",
+		"cab-cd07fbcc58a696bfcf97ba75e6fbc3b8"
+	],
+	"m_ExplicitDataLayout": 1,
+	"m_HideFlags": 0,
+	"m_IsStreamedSceneAssetBundle": false,
+	"m_MainAsset": {
+		"m_Asset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 0 },
+		"m_PreloadIndex": 0,
+		"m_PreloadSize": 0
+	},
+	"m_Name": "cc905cbe80a22fe95b5077cd9c3ec1f6_assets_all.bundle",
+	"m_PathFlags": 0,
+	"m_PrefabAsset": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 0 },
+	"m_PrefabInstance": { "m_Collection": "cab-2b553e45d5c1990cb6fc6283933b3df6", "m_PathID": 0 },
+	"m_PreloadTable": [],
+	"m_RuntimeCompatibility": 1,
+	"m_SceneHashes": {}
+}
