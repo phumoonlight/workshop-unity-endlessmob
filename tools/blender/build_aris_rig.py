@@ -105,6 +105,15 @@ for v in body.data.vertices:
     body.vertex_groups[best[1][0]].add([v.index], 1.0 - w0, 'REPLACE')
     fixed += 1
 print("FILLED BY NEAREST BONE", fixed)
+# Nearest-bone is all-or-nothing, so a strand kinks where one bone's territory meets the next.
+# Smooth each vertex's weights with its neighbours' a few times, like blurring the boundaries.
+bpy.ops.object.select_all(action='DESELECT'); body.select_set(True); bpy.context.view_layer.objects.active = body
+bpy.ops.object.mode_set(mode='WEIGHT_PAINT')
+bpy.ops.object.vertex_group_smooth(group_select_mode='ALL', factor=0.5, repeat=6, expand=0.0)
+bpy.ops.object.vertex_group_normalize_all(group_select_mode='ALL', lock_active=False)
+bpy.ops.object.mode_set(mode='OBJECT')
+multi = sum(1 for v in body.data.vertices if sum(1 for g in v.groups if g.weight > 0.01) >= 3)
+print("SMOOTHED: verts following 3+ bones", multi, "of", len(body.data.vertices))
 unweighted = sum(1 for v in body.data.vertices if not any(g.weight > 0.001 for g in v.groups))
 print("VERTS", len(body.data.vertices), "UNWEIGHTED", unweighted, "GROUPS", len(body.vertex_groups))
 # Which bones carry the most vertices? (sanity: Head and Hips should be big)
